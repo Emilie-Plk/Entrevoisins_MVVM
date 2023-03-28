@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Entrevoisins_MVVM</string>
+    <string name="tab_neighbour_title">My neighbours</string>
+    <string name="tab_favorites_title">Favorites</string>
+    <string name="add_neighbour_fab_descr">Add a new neighbour</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="social">https://facebook.com/%1$s</string>
+    <string name="add_favorite_fab">Add favorite</string>
+    <string name="profile_picture_descr">Profile picture of neighbour</string>
+    <string name="phone_logo_descr">phone logo</string>
+    <string name="pin_logo_descr">pin logo</string>
+    <string name="contact_logo_descr">contact logo</string>
+    <string name="back_button_descr">back button</string>
+    <string name="aboutMeTV">À propos de moi</string>
+    <string name="save_btn_detail">Save</string>
+    <string name="about_me_et_hint_detail">About me</string>
+    <string name="address_et_hint_detail">Address</string>
+    <string name="phone_number_et_hint_detail">Phone number</string>
+    <string name="name_et_hint_detail">Name</string>
+    <string name="neighbour_avatar_descr">Neighbour profile picture</string>
+    <string name="back_to_neighbours_list_descr">Back to neighbours\' list</string>
+    <string name="gps_logo_detail_descr">GPS logo</string>
+    <string name="www_logo_profile_descr">WWW_logo</string>
+</resources>

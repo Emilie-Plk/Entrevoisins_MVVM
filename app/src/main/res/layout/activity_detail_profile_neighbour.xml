@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_neighbour_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGrey"
+    android:elevation="5dp"
+    android:fillViewport="true"
+    tools:context=".view.detail.DetailProfileNeighbourActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/back_imagebtn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="24dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back_to_neighbours_list_descr"
+            android:elevation="2dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/neighbourProfilePic"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/profile_picture_descr" />
+
+        <TextView
+            android:id="@+id/neighbourProfilePicName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Emilie"
+            android:textColor="@android:color/background_light"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toBottomOf="@+id/neighbourProfilePic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.084"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/neighbourProfilePic"
+            app:layout_constraintVertical_bias="0.893" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CVNeighbourInfos"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/neighbourProfilePic">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/CVNeighbourNameTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Emilie"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.095" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="18dp"
+                    android:background="@color/lightGrey"
+                    app:layout_constraintBottom_toTopOf="@+id/CVNeighbourCityTV"
+                    app:layout_constraintTop_toBottomOf="@+id/CVNeighbourNameTV" />
+
+
+                <ImageView
+                    android:id="@+id/phoneLogo"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="18dp"
+                    android:src="@drawable/phone"
+                    app:layout_constraintBottom_toBottomOf="@+id/CVNeighbourPhoneTV"
+                    app:layout_constraintEnd_toStartOf="@+id/CVNeighbourPhoneTV"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/CVNeighbourPhoneTV" />
+
+                <TextView
+                    android:id="@+id/CVNeighbourCityTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:paddingStart="18dp"
+                    tools:text="CLAYE-SOUILLY"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/pinLogo"
+                    app:layout_constraintStart_toStartOf="@+id/CVNeighbourPhoneTV"
+                    app:layout_constraintTop_toBottomOf="@+id/CVNeighbourNameTV" />
+
+                <ImageView
+                    android:id="@+id/pinLogo"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="18dp"
+                    android:src="@drawable/pin"
+                    app:layout_constraintBottom_toBottomOf="@+id/CVNeighbourCityTV"
+                    app:layout_constraintEnd_toStartOf="@+id/CVNeighbourCityTV"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/CVNeighbourCityTV"
+                    android:contentDescription="@string/gps_logo_detail_descr" />
+
+                <TextView
+                    android:id="@+id/CVNeighbourSocial"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="24dp"
+                    android:paddingStart="18dp"
+                    android:text="@string/social"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/webLogo" />
+
+                <ImageView
+                    android:id="@+id/webLogo"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="18dp"
+                    android:src="@drawable/web"
+                    app:layout_constraintBottom_toBottomOf="@+id/CVNeighbourSocial"
+                    app:layout_constraintEnd_toStartOf="@+id/CVNeighbourSocial"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/CVNeighbourSocial"
+                    app:layout_constraintVertical_bias="0.4"
+                    android:contentDescription="@string/www_logo_profile_descr" />
+
+                <TextView
+                    android:id="@+id/CVNeighbourPhoneTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="18dp"
+                    tools:text="0123456789"
+                    app:layout_constraintBottom_toTopOf="@+id/CVNeighbourSocial"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/phoneLogo"
+                    app:layout_constraintStart_toStartOf="@+id/CVNeighbourSocial"
+                    app:layout_constraintTop_toBottomOf="@+id/CVNeighbourCityTV" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:minHeight="150dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CVNeighbourInfos">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:id="@+id/aboutMeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginBottom="18dp"
+                    android:text="@string/aboutMeTV"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/lightGrey"
+                    app:layout_constraintBottom_toTopOf="@+id/aboutMeDetailTV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aboutMeTV"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/aboutMeDetailTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aboutMeTV"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Cheese swiss boursin. Cottage cheese swiss roquefort melted cheese stilton croque monsieur caerphilly bocconcini. Jarlsberg smelly cheese everyone loves squirty cheese parmesan emmental bavarian bergkase edam. Cheeseburger melted cheese danish fontina everyone loves jarlsberg squirty cheese everyone loves cauliflower cheese.  " />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addFavoriteFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/lightGrey"
+            android:clickable="true"
+            android:contentDescription="@string/add_favorite_fab"
+            android:focusable="true"
+            android:src="@drawable/ic_star_border_white_24dp"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/CVNeighbourInfos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/neighbourProfilePic"
+            app:tint="@null" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
