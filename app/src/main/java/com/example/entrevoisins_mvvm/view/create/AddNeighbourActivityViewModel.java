@@ -15,7 +15,7 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
     // TODO: Maybe create a new object (List<String> or NeighbourData) to encapsulate all neighbour data?
     private final String randomImageUrl = "https://i.pravatar.cc/150?u=" + System.currentTimeMillis();
-    private final MutableLiveData<String> randomImageUrlMutableLiveData = new MutableLiveData<>(randomImageUrl);
+    private final MutableLiveData<String> randomImageUrlMutableLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>("");
 
@@ -34,7 +34,7 @@ public class AddNeighbourActivityViewModel extends ViewModel {
     ) {
         this.repository = repository;
 
-        randomImageUrlMutableLiveData.setValue("https://i.pravatar.cc/150?u=" + System.currentTimeMillis());
+        randomImageUrlMutableLiveData.setValue(randomImageUrl);
 
         isButtonEnabled.setValue(
                 !randomImageUrlMutableLiveData.getValue().isEmpty()
@@ -46,7 +46,7 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
 
     public void addNeighbour(String name, String address, String phoneNumber, String aboutMe) {
-        // should I create the new NeighbourEntity here or in the fragment?
+        // TODO: should I create the new NeighbourEntity here or in the fragment?
         repository.addNeighbour(new NeighbourEntity(0,
                 false,
                 name,

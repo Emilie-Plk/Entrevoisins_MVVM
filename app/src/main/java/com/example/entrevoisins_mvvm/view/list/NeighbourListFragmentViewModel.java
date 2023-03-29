@@ -21,7 +21,7 @@ public class NeighbourListFragmentViewModel extends ViewModel {
     }
 
     public LiveData<List<NeighbourViewStateItem>> getNeighbourViewStateItemLiveData(boolean isFav) {
-        return Transformations.map(repository.getNeighbourEntities(), neighbours -> {
+        return Transformations.map(repository.getNeighbourEntitiesLiveData(), neighbours -> {
             List<NeighbourViewStateItem> neighboursViewStateItems = new ArrayList<>();
             for (NeighbourEntity neighbour : neighbours) {
                 if (neighbour.isFavorite() || !isFav) {

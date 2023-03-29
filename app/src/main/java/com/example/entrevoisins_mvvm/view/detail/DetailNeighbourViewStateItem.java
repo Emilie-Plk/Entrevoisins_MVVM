@@ -1,5 +1,6 @@
 package com.example.entrevoisins_mvvm.view.detail;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import java.util.Objects;
@@ -23,7 +24,6 @@ public class DetailNeighbourViewStateItem {
     @NonNull
     private final String aboutMe;
 
-    private final boolean isFavorite;
 
     public DetailNeighbourViewStateItem(
             long id,
@@ -31,15 +31,13 @@ public class DetailNeighbourViewStateItem {
             @NonNull String avatarUrl,
             @NonNull String address,
             @NonNull String phoneNumber,
-            @NonNull String aboutMe,
-            boolean isFavorite) {
+            @NonNull String aboutMe) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
-        this.isFavorite = isFavorite;
     }
 
     public long getId() {
@@ -71,21 +69,18 @@ public class DetailNeighbourViewStateItem {
         return aboutMe;
     }
 
-    public boolean getIsFavorite() {
-        return isFavorite;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DetailNeighbourViewStateItem that = (DetailNeighbourViewStateItem) o;
-        return id == that.id && isFavorite == that.isFavorite && name.equals(that.name) && avatarUrl.equals(that.avatarUrl) && address.equals(that.address) && phoneNumber.equals(that.phoneNumber) && aboutMe.equals(that.aboutMe);
+        return id == that.id && name.equals(that.name) && avatarUrl.equals(that.avatarUrl) && address.equals(that.address) && phoneNumber.equals(that.phoneNumber) && aboutMe.equals(that.aboutMe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, avatarUrl, address, phoneNumber, aboutMe, isFavorite);
+        return Objects.hash(id, name, avatarUrl, address, phoneNumber, aboutMe);
     }
 
     @NonNull
@@ -98,7 +93,6 @@ public class DetailNeighbourViewStateItem {
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", aboutMe='" + aboutMe + '\'' +
-                ", isFavorite=" + isFavorite +
                 '}';
     }
 }

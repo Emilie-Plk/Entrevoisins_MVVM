@@ -3,7 +3,6 @@ package com.example.entrevoisins_mvvm.view.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +22,6 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
 
     private long neighbourId;
 
-    private boolean isFavorite;
 
     public static Intent navigate(Context context, long neighbourId) {
         Intent intent = new Intent(context, DetailProfileNeighbourActivity.class);
@@ -42,14 +40,15 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
 
         neighbourId = getIntent().getLongExtra(NEIGHBOUR_ID, -1);
 
-
         updateFabFavorite();
 
-        binding.addFavoriteFab.setOnClickListener(v -> {
-            viewModel.updateNeighbourToFav(neighbourId, isFavorite);
-        });
+        setupObservers();
 
+        setupClickListeners();
 
+    }
+
+    private void setupObservers() {
         viewModel.getDetailNeighbourViewStateItem(neighbourId).observe(this, detailNeighbourViewStateItem -> {
             Glide.with(this)
                     .load(detailNeighbourViewStateItem.getAvatarUrl())
@@ -62,22 +61,22 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
             String neighbourSocial = this.getResources().getString(R.string.social, detailNeighbourViewStateItem.getName().toLowerCase());
             binding.CVNeighbourSocial.setText(neighbourSocial);
             binding.aboutMeDetailTV.setText(detailNeighbourViewStateItem.getAboutMe());
-            isFavorite = detailNeighbourViewStateItem.getIsFavorite();
         });
+
+        viewModel.getFavoriteFabResourcesMutableLiveData().observe(this,
+                fabResources -> binding.addFavoriteFab.setImageResource(fabResources));
+    }
+
+    private void setupClickListeners() {
+        binding.addFavoriteFab.setOnClickListener(v ->
+                viewModel.toggleNeighbourFavorite(neighbourId));
 
         binding.backImagebtn.setOnClickListener(v -> finish());
     }
 
     private void updateFabFavorite() {
-        viewModel.isNeighbourFavorite(neighbourId).observe(this, isFav -> {
-            if (Boolean.TRUE.equals(isFav)) {
-                Log.i("Emilie", "is Fav!");
-                binding.addFavoriteFab.setImageResource(R.drawable.baseline_star_24);
-            } else {
-                Log.i("Emilie", "is not Fav!");
-                binding.addFavoriteFab.setImageResource(R.drawable.ic_star_border_white_24dp);
-            }
-        });
+        // TODO: meh, don't like this way
+        viewModel.isNeighbourFavorite(neighbourId);
     }
 
     private void setViewModel() {

@@ -20,6 +20,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private static final int THREADS = Runtime.getRuntime().availableProcessors();
     private static final Executor EXECUTOR = Executors.newFixedThreadPool(THREADS);
+    private final Executor ioExecutor = Executors.newFixedThreadPool(4);
 
     private static volatile ViewModelFactory factory;
 
@@ -49,7 +50,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(AddNeighbourActivityViewModel.class)) {
             return (T) new AddNeighbourActivityViewModel(repository);
         } else if (modelClass.isAssignableFrom(DetailProfileNeighbourViewModel.class)) {
-            return (T) new DetailProfileNeighbourViewModel(repository);
+            return (T) new DetailProfileNeighbourViewModel(repository, ioExecutor, MainApplication.getApplication().getResources());
         } else
             throw new IllegalArgumentException("Unknown model class!");
     }
