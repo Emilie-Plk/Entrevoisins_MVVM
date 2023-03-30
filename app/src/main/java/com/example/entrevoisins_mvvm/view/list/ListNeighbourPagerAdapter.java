@@ -28,10 +28,11 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-                return NeighbourListFragment.newInstance(false);
+            return NeighbourListFragment.newInstance(false);
         } else if (position == 1) {
-                return NeighbourListFragment.newInstance(true);
-        } else  throw new IllegalArgumentException("Invalid position: " + position);
+            return NeighbourListFragment.newInstance(true);
+        } else
+            throw new IllegalArgumentException("Invalid position: " + position);
     }
 
     @Override

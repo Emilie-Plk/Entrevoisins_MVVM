@@ -17,6 +17,7 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
 
     private final AtomicBoolean mPending = new AtomicBoolean(false);
 
+    @Override
     @MainThread
     public void observe(@NonNull LifecycleOwner owner, @NonNull final Observer<? super T> observer) {
 
@@ -32,6 +33,7 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
         });
     }
 
+    @Override
     @MainThread
     public void setValue(@Nullable T t) {
         mPending.set(true);

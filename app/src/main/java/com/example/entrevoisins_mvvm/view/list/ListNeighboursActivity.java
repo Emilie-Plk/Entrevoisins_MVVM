@@ -25,6 +25,6 @@ public class ListNeighboursActivity extends AppCompatActivity {
         binding.tabs.setupWithViewPager(binding.container);
 
         binding.addNeighbourFab.setOnClickListener(v ->
-                startActivity(AddNeighbourActivity.navigate(this)));
+            startActivity(AddNeighbourActivity.navigate(this)));
     }
 }

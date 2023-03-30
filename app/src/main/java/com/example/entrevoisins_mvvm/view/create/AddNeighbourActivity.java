@@ -39,14 +39,13 @@ public class AddNeighbourActivity extends AppCompatActivity {
         checkForFieldsCompletion();
         setupObservers();
         addNewNeighbour();
-
     }
 
 
     private void setViewModel() {
         viewModel = new ViewModelProvider(
-                this, ViewModelFactory.getInstance())
-                .get(AddNeighbourActivityViewModel.class);
+            this, ViewModelFactory.getInstance())
+            .get(AddNeighbourActivityViewModel.class);
     }
 
     private void checkForFieldsCompletion() {
@@ -58,29 +57,35 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
     private void setupObservers() {
         // Avatar's observer
-        viewModel.getRandomImageUrl().observe(this,
-                imageUrl ->
-                        Glide.with(this)
-                                .load(imageUrl)
-                                .transition(DrawableTransitionOptions.withCrossFade())
-                                .apply(RequestOptions.circleCropTransform())
-                                .into(binding.avatar));
+        viewModel.getRandomImageUrl().observe(this, imageUrl ->
+            Glide
+                .with(this)
+                .load(imageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .apply(RequestOptions.circleCropTransform())
+                .into(binding.avatar));
 
         // Button enabling's observer
         viewModel.getIsButtonEnabled().observe(this, isEnabled ->
-                binding.create.setEnabled(isEnabled));
+            binding.create.setEnabled(isEnabled)
+        );
 
         // Close activity's observer
-        viewModel.getCloseActivity().observe(this, closeActivity -> finish());
+        viewModel.getCloseActivity().observe(this, closeActivity ->
+            finish()
+        );
     }
 
     private void addNewNeighbour() {
         //noinspection ConstantConditions
-        binding.create.setOnClickListener(v -> viewModel.addNeighbour(
+        binding.create.setOnClickListener(v ->
+            viewModel.addNeighbour(
                 binding.name.getText().toString(),
                 binding.address.getText().toString(),
                 binding.phoneNumber.getText().toString(),
-                binding.aboutMe.getText().toString()));
+                binding.aboutMe.getText().toString()
+            )
+        );
     }
 
     private void addTextWatcher(EditText editText, Consumer<String> valueSetter) {
@@ -99,5 +104,4 @@ public class AddNeighbourActivity extends AppCompatActivity {
             }
         });
     }
-
 }

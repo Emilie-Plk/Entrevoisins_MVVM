@@ -22,20 +22,21 @@ public class NeighbourListFragmentViewModel extends ViewModel {
 
     public LiveData<List<NeighbourViewStateItem>> getNeighbourViewStateItemLiveData(boolean isFav) {
         return Transformations.map(repository.getNeighbourEntitiesLiveData(), neighbours -> {
-            List<NeighbourViewStateItem> neighboursViewStateItems = new ArrayList<>();
-            for (NeighbourEntity neighbour : neighbours) {
-                if (neighbour.isFavorite() || !isFav) {
-                    neighboursViewStateItems.add(
+                List<NeighbourViewStateItem> neighboursViewStateItems = new ArrayList<>();
+                for (NeighbourEntity neighbour : neighbours) {
+                    if (neighbour.isFavorite() || !isFav) {
+                        neighboursViewStateItems.add(
                             new NeighbourViewStateItem(
-                                    neighbour.getId(),
-                                    neighbour.getNeighbourName(),
-                                    neighbour.getAvatarUrl()
+                                neighbour.getId(),
+                                neighbour.getNeighbourName(),
+                                neighbour.getAvatarUrl()
                             )
-                    );
+                        );
+                    }
                 }
+                return neighboursViewStateItems;
             }
-            return neighboursViewStateItems;
-        });
+        );
     }
 
     public void deleteNeighbour(long id) {

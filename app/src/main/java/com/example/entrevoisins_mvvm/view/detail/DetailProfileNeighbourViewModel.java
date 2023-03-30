@@ -1,7 +1,6 @@
 package com.example.entrevoisins_mvvm.view.detail;
 
-import android.content.res.Resources;
-
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,56 +17,46 @@ public class DetailProfileNeighbourViewModel extends ViewModel {
 
     private final NeighboursRepository repository;
 
-    @NonNull
-    private final Resources res;
-
-
-    // private final MutableLiveData<Boolean> isNeighbourFavorite = new MutableLiveData<>();
-
     private final MutableLiveData<Integer> favoriteFabResourcesMutableLiveData = new MutableLiveData<>();
 
     @NonNull
     private final Executor ioExecutor;
 
     public DetailProfileNeighbourViewModel(
-            @NonNull NeighboursRepository repository,
-            @NonNull Executor ioExecutor,
-            @NonNull Resources res) {
+        @NonNull NeighboursRepository repository,
+        @NonNull Executor ioExecutor) {
         this.repository = repository;
         this.ioExecutor = ioExecutor;
-        this.res = res;
     }
 
     public LiveData<DetailNeighbourViewStateItem> getDetailNeighbourViewStateItem(long neighbourId) {
-        return Transformations.map(repository.getDetailNeighbourInfo(neighbourId), neighbour ->
-                new DetailNeighbourViewStateItem(
-                        neighbour.getId(),
-                        neighbour.getNeighbourName(),
-                        neighbour.getAvatarUrl(),
-                        neighbour.getAddress(),
-                        neighbour.getPhoneNumber(),
-                        neighbour.getAboutMe()));
-    }
-
-    public void toggleNeighbourFavorite(long neighbourId) {
-        ioExecutor.execute(() -> {
-            NeighbourEntity neighbourEntity = repository.getNeighbourEntity(neighbourId);
-            repository.updateFavorite(neighbourId, !neighbourEntity.isFavorite());
-        });
-    }
-
-    public void isNeighbourFavorite(long neighbourId) {
-        ioExecutor.execute(() -> {
-            NeighbourEntity neighbourEntity = repository.getNeighbourEntity(neighbourId);
-            if (neighbourEntity.isFavorite()) {
-                favoriteFabResourcesMutableLiveData.postValue(R.drawable.baseline_star_24);
-            } else {
-                favoriteFabResourcesMutableLiveData.postValue(R.drawable.ic_star_border_white_24dp);
+        return Transformations.map(repository.getDetailNeighbourInfo(neighbourId), neighbour -> {
+                @DrawableRes int favoriteDrawable;
+                if (neighbour.isFavorite()) {
+                    favoriteDrawable = R.drawable.baseline_star_24;
+                } else {
+                    favoriteDrawable = R.drawable.ic_star_border_white_24dp;
+                }
+                return new DetailNeighbourViewStateItem(
+                    neighbour.getNeighbourName(),
+                    neighbour.getAvatarUrl(),
+                    neighbour.getAddress(),
+                    neighbour.getPhoneNumber(),
+                    neighbour.getAboutMe(),
+                    favoriteDrawable
+                );
             }
-        });
+        );
     }
 
-
+    public void onToggleNeighbourFavorite(long neighbourId) {
+        ioExecutor.execute(() -> {
+                NeighbourEntity neighbourEntity = repository.getNeighbourEntity(neighbourId);
+                repository.updateFavorite(neighbourId, !neighbourEntity.isFavorite()
+                );
+            }
+        );
+    }
 
     public MutableLiveData<Integer> getFavoriteFabResourcesMutableLiveData() {
         return favoriteFabResourcesMutableLiveData;

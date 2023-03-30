@@ -40,10 +40,11 @@ public class AddNeighbourActivityViewModelTest {
 
         // WHEN
         viewModel.addNeighbour(
-                neighbourEntity.getNeighbourName(),
-                neighbourEntity.getAddress(),
-                neighbourEntity.getPhoneNumber(),
-                (neighbourEntity.getPhoneNumber()));
+            neighbourEntity.getNeighbourName(),
+            neighbourEntity.getAddress(),
+            neighbourEntity.getPhoneNumber(),
+            neighbourEntity.getAboutMe()
+        );
 
         // THEN
         verify(repository).addNeighbour(neighbourEntity);

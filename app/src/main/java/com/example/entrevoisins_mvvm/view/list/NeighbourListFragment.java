@@ -24,7 +24,7 @@ public class NeighbourListFragment extends Fragment {
 
     private FragmentNeighbourListBinding binding;
 
-@NonNull
+    @NonNull
     private static final String IS_FAV = "IS_FAV";
 
     public static NeighbourListFragment newInstance(boolean isFav) {
@@ -36,14 +36,11 @@ public class NeighbourListFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNeighbourListBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -52,8 +49,7 @@ public class NeighbourListFragment extends Fragment {
     }
 
     private void setUpViewModel() {
-        viewModel = new ViewModelProvider(requireActivity(),
-                ViewModelFactory.getInstance()).get(NeighbourListFragmentViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity(), ViewModelFactory.getInstance()).get(NeighbourListFragmentViewModel.class);
     }
 
     private void initRecyclerView() {
@@ -63,16 +59,17 @@ public class NeighbourListFragment extends Fragment {
         binding.listNeighbours.addItemDecoration(dividerItemDecoration);
 
         NeighboursListAdapter adapter = new NeighboursListAdapter(new OnNeighbourClickedListener() {
-            @Override
-            public void onNeighbourClicked(long id) {
-                startActivity(DetailProfileNeighbourActivity.navigate(requireContext(), id));
-            }
+                @Override
+                public void onNeighbourClicked(long id) {
+                    startActivity(DetailProfileNeighbourActivity.navigate(requireContext(), id));
+                }
 
-            @Override
-            public void onNeighbourDelete(long id) {
-                viewModel.deleteNeighbour(id);
+                @Override
+                public void onNeighbourDelete(long id) {
+                    viewModel.deleteNeighbour(id);
+                }
             }
-        });
+        );
 
         binding.listNeighbours.setAdapter(adapter);
         binding.listNeighbours.setLayoutManager(new LinearLayoutManager(getContext()));

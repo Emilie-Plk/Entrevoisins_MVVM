@@ -37,13 +37,13 @@ public class NeighbourEntity {
     private final String aboutMe;
 
     public NeighbourEntity(
-            long id,
-            boolean isFavorite,
-            @NonNull String neighbourName,
-            @NonNull String avatarUrl,
-            @NonNull String address,
-            @NonNull String phoneNumber,
-            @NonNull String aboutMe
+        long id,
+        boolean isFavorite,
+        @NonNull String neighbourName,
+        @NonNull String avatarUrl,
+        @NonNull String address,
+        @NonNull String phoneNumber,
+        @NonNull String aboutMe
     ) {
         this.id = id;
         this.isFavorite = isFavorite;
@@ -91,14 +91,14 @@ public class NeighbourEntity {
     @Override
     public String toString() {
         return "NeighbourEntity{" +
-                "id=" + id +
-                ", isFavorite=" + isFavorite +
-                ", neighbourName='" + neighbourName + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", aboutMe='" + aboutMe + '\'' +
-                '}';
+            "id=" + id +
+            ", isFavorite=" + isFavorite +
+            ", neighbourName='" + neighbourName + '\'' +
+            ", avatarUrl='" + avatarUrl + '\'' +
+            ", address='" + address + '\'' +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            ", aboutMe='" + aboutMe + '\'' +
+            '}';
     }
 
     @Override

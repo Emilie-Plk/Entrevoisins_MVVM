@@ -50,7 +50,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass.isAssignableFrom(AddNeighbourActivityViewModel.class)) {
             return (T) new AddNeighbourActivityViewModel(repository);
         } else if (modelClass.isAssignableFrom(DetailProfileNeighbourViewModel.class)) {
-            return (T) new DetailProfileNeighbourViewModel(repository, ioExecutor, MainApplication.getApplication().getResources());
+            return (T) new DetailProfileNeighbourViewModel(repository, ioExecutor);
         } else
             throw new IllegalArgumentException("Unknown model class!");
     }

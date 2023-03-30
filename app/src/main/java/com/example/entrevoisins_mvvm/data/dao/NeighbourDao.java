@@ -17,6 +17,7 @@ public interface NeighbourDao {
 
     @Query("SELECT * FROM neighbours WHERE id=:id LIMIT 1")
     NeighbourEntity getNeighbour(long id);
+
     @Query("DELETE FROM neighbours WHERE id = :neighbourId")
     void deleteNeighbour(long neighbourId);
 

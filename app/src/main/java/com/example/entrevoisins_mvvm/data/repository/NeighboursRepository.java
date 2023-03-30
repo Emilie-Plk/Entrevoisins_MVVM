@@ -15,7 +15,9 @@ public class NeighboursRepository {
     private final Executor executor;
 
     public NeighboursRepository(NeighbourDao dao, Executor executor) {
-   /*     if (buildConfigResolver.isDebug()) {
+   /*
+   // TODO: didn't use it, didn't really get it!..
+      if (buildConfigResolver.isDebug()) {
             generateNeighbours();
         }*/
         this.dao = dao;
@@ -24,12 +26,12 @@ public class NeighboursRepository {
 
     public void addNeighbour(NeighbourEntity neighbour) {
         executor.execute(() ->
-                dao.insertNeighbour(neighbour));
+            dao.insertNeighbour(neighbour));
     }
 
     public void deleteNeighbour(long neighbourID) {
         executor.execute(() ->
-                dao.deleteNeighbour(neighbourID));
+            dao.deleteNeighbour(neighbourID));
     }
 
     public LiveData<List<NeighbourEntity>> getNeighbourEntitiesLiveData() {
@@ -37,15 +39,15 @@ public class NeighboursRepository {
     }
 
     public void updateFavorite(long neighbourId, boolean isFavorite) {
-        executor.execute(() -> dao.updateFavorite(neighbourId, isFavorite));
+        executor.execute(() ->
+            dao.updateFavorite(neighbourId, isFavorite));
     }
 
     public LiveData<NeighbourEntity> getDetailNeighbourInfo(long neighbourId) {
         return dao.getDetailNeighbourInfo(neighbourId);
     }
 
-   public NeighbourEntity getNeighbourEntity(long neighbourId) {
-    return dao.getNeighbour(neighbourId);
+    public NeighbourEntity getNeighbourEntity(long neighbourId) {
+        return dao.getNeighbour(neighbourId);
     }
-
 }

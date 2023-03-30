@@ -7,8 +7,6 @@ import java.util.Objects;
 
 public class DetailNeighbourViewStateItem {
 
-    private final long id;
-
     @NonNull
     private final String name;
 
@@ -24,24 +22,24 @@ public class DetailNeighbourViewStateItem {
     @NonNull
     private final String aboutMe;
 
+    @DrawableRes
+    private final int favoriteDrawable;
+
 
     public DetailNeighbourViewStateItem(
-            long id,
-            @NonNull String name,
-            @NonNull String avatarUrl,
-            @NonNull String address,
-            @NonNull String phoneNumber,
-            @NonNull String aboutMe) {
-        this.id = id;
+        @NonNull String name,
+        @NonNull String avatarUrl,
+        @NonNull String address,
+        @NonNull String phoneNumber,
+        @NonNull String aboutMe,
+        int favoriteDrawable
+    ) {
         this.name = name;
         this.avatarUrl = avatarUrl;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.aboutMe = aboutMe;
-    }
-
-    public long getId() {
-        return id;
+        this.favoriteDrawable = favoriteDrawable;
     }
 
     @NonNull
@@ -69,30 +67,20 @@ public class DetailNeighbourViewStateItem {
         return aboutMe;
     }
 
+    public int getFavoriteDrawable() {
+        return favoriteDrawable;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DetailNeighbourViewStateItem that = (DetailNeighbourViewStateItem) o;
-        return id == that.id && name.equals(that.name) && avatarUrl.equals(that.avatarUrl) && address.equals(that.address) && phoneNumber.equals(that.phoneNumber) && aboutMe.equals(that.aboutMe);
+        return favoriteDrawable == that.favoriteDrawable && name.equals(that.name) && avatarUrl.equals(that.avatarUrl) && address.equals(that.address) && phoneNumber.equals(that.phoneNumber) && aboutMe.equals(that.aboutMe);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, avatarUrl, address, phoneNumber, aboutMe);
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "DetailNeighbourViewStateItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", aboutMe='" + aboutMe + '\'' +
-                '}';
+        return Objects.hash(name, avatarUrl, address, phoneNumber, aboutMe, favoriteDrawable);
     }
 }

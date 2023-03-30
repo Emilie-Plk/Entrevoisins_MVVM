@@ -2,6 +2,7 @@ package com.example.entrevoisins_mvvm;
 
 import static com.example.entrevoisins_mvvm.utils.TestUtil.getValueForTesting;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -41,9 +42,11 @@ public class NeighbourListFragmentViewModelTest {
     @Before
     public void setUp() {
         neighbourListMutableLiveData = new MutableLiveData<>();
+
+        doReturn(neighbourListMutableLiveData).when(repository).getNeighbourEntitiesLiveData();
+
         List<NeighbourEntity> dummyNeighbourList = getNeighbourListTest();
         neighbourListMutableLiveData.setValue(dummyNeighbourList);
-        doReturn(neighbourListMutableLiveData).when(repository).getNeighbourEntitiesLiveData();
 
         viewModel = new NeighbourListFragmentViewModel(repository);
     }
@@ -53,9 +56,36 @@ public class NeighbourListFragmentViewModelTest {
         // WHEN
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(false));
 
-        verify(repository).getNeighbourEntitiesLiveData();
         // THEN
+        // TODO: why should the assertion be declared BEFORE the verification?
         assertEquals(3, result.size());
+        verify(repository).getNeighbourEntitiesLiveData();
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    public void nominalCase_givesNoFavoriteNeighbours() {
+        // WHEN
+        List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(true));
+
+        // THEN
+        assertEquals(0, result.size());
+        verify(repository).getNeighbourEntitiesLiveData();
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    public void onOneFavoriteNeighbour_verifyRepositoryAddsGFavoriteNeighbour() {
+        // GIVEN
+        neighbourListMutableLiveData.setValue(getNeighbourWithFavListTest());
+
+        // WHEN
+        List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(true));
+
+        // THEN
+        assertEquals(1, result.size());
+        verify(repository).getNeighbourEntitiesLiveData();
+        verifyNoMoreInteractions(repository);
     }
 
     @Test
@@ -69,6 +99,7 @@ public class NeighbourListFragmentViewModelTest {
         // THEN
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(false));
         assertEquals(0, result.size());
+        verifyNoMoreInteractions(repository);
     }
 
     @Test
@@ -84,35 +115,73 @@ public class NeighbourListFragmentViewModelTest {
         verifyNoMoreInteractions(repository);
     }
 
-    //region helper method
+    //region helper methods
     private List<NeighbourEntity> getNeighbourListTest() {
         List<NeighbourEntity> neighbourEntityList = new ArrayList<>();
         neighbourEntityList.add(
-                new NeighbourEntity(
-                        1, false,
-                        "Nikaido",
-                        "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-                        "Saint-Pierre-du-Mont ; 5km",
-                        "+33 6 86 57 90 14",
-                        "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
+            new NeighbourEntity(
+                1,
+                false,
+                "Nikaido",
+                "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                "Saint-Pierre-du-Mont ; 5km",
+                "+33 6 86 57 90 14",
+                "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
 
         neighbourEntityList.add(
-                new NeighbourEntity(
-                        2, false,
-                        "Kaiman",
-                        "https://i.pravatar.cc/150?u=a042581f4e2902898",
-                        "Saint-Pierre-du-Mont ; 5km",
-                        "+33 6 86 57 90 14",
-                        "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
+            new NeighbourEntity(
+                2,
+                false,
+                "Kaiman",
+                "https://i.pravatar.cc/150?u=a042581f4e2902898",
+                "Saint-Pierre-du-Mont ; 5km",
+                "+33 6 86 57 90 14",
+                "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
 
         neighbourEntityList.add(
-                new NeighbourEntity(
-                        3, false,
-                        "Ebisu",
-                        "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-                        "Saint-Pierre-du-Mont ; 5km",
-                        "+33 6 86 57 90 14",
-                        "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
+            new NeighbourEntity(
+                3,
+                false,
+                "Ebisu",
+                "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                "Saint-Pierre-du-Mont ; 5km",
+                "+33 6 86 57 90 14",
+                "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
+
+        return neighbourEntityList;
+    }
+
+    private List<NeighbourEntity> getNeighbourWithFavListTest() {
+        List<NeighbourEntity> neighbourEntityList = new ArrayList<>();
+        neighbourEntityList.add(
+            new NeighbourEntity(
+                1,
+                true,
+                "Nikaido",
+                "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                "Saint-Pierre-du-Mont ; 5km",
+                "+33 6 86 57 90 14",
+                "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
+
+        neighbourEntityList.add(
+            new NeighbourEntity(
+                2,
+                false,
+                "Kaiman",
+                "https://i.pravatar.cc/150?u=a042581f4e2902898",
+                "Saint-Pierre-du-Mont ; 5km",
+                "+33 6 86 57 90 14",
+                "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
+
+        neighbourEntityList.add(
+            new NeighbourEntity(
+                3,
+                false,
+                "Ebisu",
+                "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                "Saint-Pierre-du-Mont ; 5km",
+                "+33 6 86 57 90 14",
+                "Bonjour ! Je souhaite rencontrer des gens pour jouer à des jeux de cartes et discuter de tout et de rien."));
 
         return neighbourEntityList;
     }

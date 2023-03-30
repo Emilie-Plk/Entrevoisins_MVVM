@@ -25,35 +25,28 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
     private final MutableLiveData<String> aboutMeMutableLiveData = new MutableLiveData<>("");
 
-    private final MutableLiveData<Boolean> isButtonEnabled = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> isButtonEnabled = new MutableLiveData<>(false);
 
     private final SingleLiveEvent<Void> closeActivity = new SingleLiveEvent<>();
 
-    public AddNeighbourActivityViewModel(
-            @NonNull NeighboursRepository repository
-    ) {
+    public AddNeighbourActivityViewModel(@NonNull NeighboursRepository repository) {
         this.repository = repository;
-
         randomImageUrlMutableLiveData.setValue(randomImageUrl);
-
-        isButtonEnabled.setValue(
-                !randomImageUrlMutableLiveData.getValue().isEmpty()
-                        && !nameMutableLiveData.getValue().isEmpty()
-                        && !addressMutableLiveData.getValue().isEmpty()
-                        && !phoneNumberMutableLiveData.getValue().isEmpty()
-                        && !aboutMeMutableLiveData.getValue().isEmpty());
     }
 
 
     public void addNeighbour(String name, String address, String phoneNumber, String aboutMe) {
         // TODO: should I create the new NeighbourEntity here or in the fragment?
-        repository.addNeighbour(new NeighbourEntity(0,
+        repository.addNeighbour(
+            new NeighbourEntity(
+                0,
                 false,
                 name,
                 randomImageUrl,
                 address,
                 phoneNumber,
-                aboutMe));
+                aboutMe)
+        );
         closeActivity.call();
     }
 
@@ -71,12 +64,13 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
     public void updateForNeighbourInfoCompletion() {
         isButtonEnabled.setValue(
-                // TODO: getValue() => not good except inside of combine()!
-                !randomImageUrlMutableLiveData.getValue().isEmpty()
-                        && !nameMutableLiveData.getValue().isEmpty()
-                        && !addressMutableLiveData.getValue().isEmpty()
-                        && !phoneNumberMutableLiveData.getValue().isEmpty()
-                        && !aboutMeMutableLiveData.getValue().isEmpty());
+            // TODO: getValue() => not good except inside of combine()!
+            !randomImageUrlMutableLiveData.getValue().isEmpty()
+                && !nameMutableLiveData.getValue().isEmpty()
+                && !addressMutableLiveData.getValue().isEmpty()
+                && !phoneNumberMutableLiveData.getValue().isEmpty()
+                && !aboutMeMutableLiveData.getValue().isEmpty()
+        );
     }
 
     private void setValueForCompletion(MutableLiveData<String> mutableLiveData, String value) {
@@ -99,5 +93,4 @@ public class AddNeighbourActivityViewModel extends ViewModel {
     public void setValueForAboutMe(String aboutMe) {
         setValueForCompletion(aboutMeMutableLiveData, aboutMe);
     }
-
 }

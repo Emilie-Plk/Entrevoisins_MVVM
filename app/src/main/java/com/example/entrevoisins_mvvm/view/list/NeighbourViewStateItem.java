@@ -51,9 +51,9 @@ public class NeighbourViewStateItem {
     @Override
     public String toString() {
         return "NeighbourViewStateItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                '}';
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", avatarUrl='" + avatarUrl + '\'' +
+            '}';
     }
 }
