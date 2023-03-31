@@ -35,16 +35,12 @@ Tapp/src/main/java/com/example/entrevoisins_mvvm/view/list/NeighbourListFragment
 Oapp/src/main/java/com/example/entrevoisins_mvvm/config/BuildConfigResolver.java,6\a\6abc55a6a91b083e581badf70677a4feff05f457
 ç
 ]app/src/main/java/com/example/entrevoisins_mvvm/view/detail/DetailNeighbourViewStateItem.java,7\0\70e869e758aba7730938dc429055aad9ad76beee
-w
-Gapp/src/test/java/com/example/entrevoisins_mvvm/utils/TestExecutor.java,c\6\c6b48bd7113a924c5ea010408243a2defc2b22af
 Ö
 Uapp/src/main/java/com/example/entrevoisins_mvvm/view/create/AddNeighbourActivity.java,0\e\0e9651bdee5137304e19102b72b54d1167e6151d
 É
 Sapp/src/androidTest/java/com/example/entrevoisins_mvvm/ExampleInstrumentedTest.java,6\2\6272a640af6210dbbe2993d59e70648f22ebf8d2
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-s
-Capp/src/test/java/com/example/entrevoisins_mvvm/utils/TestUtil.java,8\b\8bd51e1c3132e27ccae6dfcec49ca36d78fb0feb
 Ç
 Rapp/src/androidTest/java/com/example/entrevoisins_mvvm/daoTest/utils/TestUtil.java,2\4\24acc00a155270ff420bd832496d6483b61659bc
 z

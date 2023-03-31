@@ -3,7 +3,6 @@ package com.example.entrevoisins_mvvm.view.detail;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -17,7 +16,6 @@ public class DetailProfileNeighbourViewModel extends ViewModel {
 
     private final NeighboursRepository repository;
 
-    private final MutableLiveData<Integer> favoriteFabResourcesMutableLiveData = new MutableLiveData<>();
 
     @NonNull
     private final Executor ioExecutor;

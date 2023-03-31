@@ -4,6 +4,8 @@ import static com.example.entrevoisins_mvvm.utils.TestUtil.getValueForTesting;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import androidx.annotation.DrawableRes;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
@@ -58,6 +60,8 @@ public class DetailProfileNeighbourViewModelTest {
 
         neighbourEntityMutableLiveData.setValue(getNeighbourEntity(false));
 
+        doReturn(NEIGHBOUR_ENTITY).when(repository).getNeighbourEntity(NEIGHBOUR_ID);
+
         viewModel = new DetailProfileNeighbourViewModel(repository, new TestExecutor());
     }
 
@@ -90,13 +94,13 @@ public class DetailProfileNeighbourViewModelTest {
 
     @Test
     public void on_toggle_neighbour_favorite() {
-        // GIVEN
-
         // WHEN
-
+        viewModel.onToggleNeighbourFavorite(NEIGHBOUR_ID);
 
         // THEN
-
+        verify(repository).getNeighbourEntity(NEIGHBOUR_ID);
+        verify(repository).updateFavorite(NEIGHBOUR_ID, !NEIGHBOUR_ENTITY.isFavorite());
+        verifyNoMoreInteractions(repository);
     }
 
     // region helper method
