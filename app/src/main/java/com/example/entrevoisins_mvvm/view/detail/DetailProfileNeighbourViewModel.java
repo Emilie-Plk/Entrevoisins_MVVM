@@ -58,7 +58,4 @@ public class DetailProfileNeighbourViewModel extends ViewModel {
         );
     }
 
-    public MutableLiveData<Integer> getFavoriteFabResourcesMutableLiveData() {
-        return favoriteFabResourcesMutableLiveData;
-    }
 }

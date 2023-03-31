@@ -59,10 +59,6 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
             binding.aboutMeDetailTV.setText(detailNeighbourViewStateItem.getAboutMe());
             binding.addFavoriteFab.setImageResource(detailNeighbourViewStateItem.getFavoriteDrawable());
         });
-
-        viewModel.getFavoriteFabResourcesMutableLiveData().observe(this, fabResources ->
-            binding.addFavoriteFab.setImageResource(fabResources)
-        );
     }
 
     private void setupClickListeners() {

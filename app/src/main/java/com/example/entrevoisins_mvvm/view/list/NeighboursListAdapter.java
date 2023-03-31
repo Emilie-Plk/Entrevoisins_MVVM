@@ -53,9 +53,9 @@ public class NeighboursListAdapter extends ListAdapter<NeighbourViewStateItem, N
             itemView.setOnClickListener(v -> listener.onNeighbourClicked(item.getId()));
 
             Glide.with(itemView.getContext())
-                    .load(item.getAvatarUrl())
-                    .apply(circleCropTransform())
-                    .into(neighbourProfilePicture);
+                .load(item.getAvatarUrl())
+                .apply(circleCropTransform())
+                .into(neighbourProfilePicture);
 
             neighbourName.setText(item.getName());
 

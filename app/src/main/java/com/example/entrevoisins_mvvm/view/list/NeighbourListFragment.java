@@ -59,16 +59,16 @@ public class NeighbourListFragment extends Fragment {
         binding.listNeighbours.addItemDecoration(dividerItemDecoration);
 
         NeighboursListAdapter adapter = new NeighboursListAdapter(new OnNeighbourClickedListener() {
-                @Override
-                public void onNeighbourClicked(long id) {
-                    startActivity(DetailProfileNeighbourActivity.navigate(requireContext(), id));
-                }
-
-                @Override
-                public void onNeighbourDelete(long id) {
-                    viewModel.deleteNeighbour(id);
-                }
+            @Override
+            public void onNeighbourClicked(long id) {
+                startActivity(DetailProfileNeighbourActivity.navigate(requireContext(), id));
             }
+
+            @Override
+            public void onNeighbourDelete(long id) {
+                viewModel.deleteNeighbour(id);
+            }
+        }
         );
 
         binding.listNeighbours.setAdapter(adapter);

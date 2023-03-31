@@ -1,5 +1,8 @@
 package com.example.entrevoisins_mvvm;
 
+import static com.example.entrevoisins_mvvm.utils.TestUtil.getValueForTesting;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -20,13 +23,18 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class AddNeighbourActivityViewModelTest {
 
+    @Rule
+    public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
+
     @Mock
     private NeighboursRepository repository = mock(NeighboursRepository.class);
 
     private AddNeighbourActivityViewModel viewModel;
 
-    @Rule
-    public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
+    private final static String NAME = "Usagi";
+    private final static String ADDRESS = "Hawaii";
+    private final static String PHONE_NUMBER = "123456789";
+    private final static String ABOUT_ME = "My fav song is The Matte Kudasai";
 
     @Before
     public void setUp() {
@@ -35,8 +43,31 @@ public class AddNeighbourActivityViewModelTest {
 
     @Test
     public void onAddingNewNeighbour_repositoryShouldAddNewNeighbour() {
-        // GIVEN
+      /*  // GIVEN
         NeighbourEntity neighbourEntity = mock(NeighbourEntity.class);
+
+        // WHEN
+        viewModel.addNeighbour(
+            neighbourEntity.getNeighbourName(),
+            neighbourEntity.getAddress(),
+            neighbourEntity.getPhoneNumber(),
+            neighbourEntity.getAboutMe()
+        );
+
+        // THEN
+        verify(repository).addNeighbour(neighbourEntity);
+        verifyNoMoreInteractions(repository);*/
+        // TODO: why a mock for NeighbourEntity doesn't work here?
+
+        // GIVEN
+        NeighbourEntity neighbourEntity = new NeighbourEntity(
+            0,
+            false,
+            NAME,
+            "https://i.pravatar.cc/150?u=" + System.currentTimeMillis(),
+            ADDRESS,
+            PHONE_NUMBER,
+            ABOUT_ME);
 
         // WHEN
         viewModel.addNeighbour(
@@ -50,5 +81,59 @@ public class AddNeighbourActivityViewModelTest {
         verify(repository).addNeighbour(neighbourEntity);
         verifyNoMoreInteractions(repository);
     }
+
+    // region Field completion
+    @Test
+    public void onNoFieldFilled() {
+        // WHEN
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+
+        // THEN
+        assertFalse(isButtonEnabled);
+    }
+
+    @Test
+    public void onFieldAllFilled() {
+        // WHEN
+        viewModel.setValueForName(NAME);
+        viewModel.setValueForAddress(ADDRESS);
+        viewModel.setValueForPhoneNumber(PHONE_NUMBER);
+        viewModel.setValueForAboutMe(ABOUT_ME);
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+
+        // THEN
+        assertTrue(isButtonEnabled);
+    }
+
+    @Test
+    public void onFieldPartiallyFilled() {
+        // WHEN
+        viewModel.setValueForName(NAME);
+        viewModel.setValueForAddress(ADDRESS);
+        viewModel.setValueForPhoneNumber("");
+        viewModel.setValueForAboutMe(ABOUT_ME);
+
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+
+        // THEN
+        assertFalse(isButtonEnabled);
+    }
+
+    @Test
+    public void onAllFieldsFilled_whenOneFieldEmptied_shouldReturnFalse() {
+        // GIVEN
+        viewModel.setValueForName(NAME);
+        viewModel.setValueForAddress(ADDRESS);
+        viewModel.setValueForPhoneNumber(PHONE_NUMBER);
+        viewModel.setValueForAboutMe(ABOUT_ME);
+
+        // WHEN
+        viewModel.setValueForPhoneNumber("");
+
+        // THEN
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+        assertFalse(isButtonEnabled);
+    }
+    // endregion
 
 }

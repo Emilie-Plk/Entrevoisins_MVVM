@@ -14,7 +14,7 @@ public class AddNeighbourActivityViewModel extends ViewModel {
     private final NeighboursRepository repository;
 
     // TODO: Maybe create a new object (List<String> or NeighbourData) to encapsulate all neighbour data?
-    private final String randomImageUrl = "https://i.pravatar.cc/150?u=" + System.currentTimeMillis();
+    private final String randomImageUrl;
     private final MutableLiveData<String> randomImageUrlMutableLiveData = new MutableLiveData<>();
 
     private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>("");
@@ -31,6 +31,7 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
     public AddNeighbourActivityViewModel(@NonNull NeighboursRepository repository) {
         this.repository = repository;
+        randomImageUrl = "https://i.pravatar.cc/150?u=" + System.currentTimeMillis();
         randomImageUrlMutableLiveData.setValue(randomImageUrl);
     }
 
@@ -62,7 +63,7 @@ public class AddNeighbourActivityViewModel extends ViewModel {
         return isButtonEnabled;
     }
 
-    public void updateForNeighbourInfoCompletion() {
+    private void updateForNeighbourInfoCompletion() {
         isButtonEnabled.setValue(
             // TODO: getValue() => not good except inside of combine()!
             !randomImageUrlMutableLiveData.getValue().isEmpty()
