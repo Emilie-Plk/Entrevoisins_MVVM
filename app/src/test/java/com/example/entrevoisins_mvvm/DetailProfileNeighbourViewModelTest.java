@@ -69,10 +69,10 @@ public class DetailProfileNeighbourViewModelTest {
     public void nominal_case() {
         // WHEN
         DetailNeighbourViewStateItem result = getValueForTesting(viewModel.getDetailNeighbourViewStateItem(NEIGHBOUR_ID));
-        DetailNeighbourViewStateItem neighbourViewStateItemTest = getNeighbourViewStateItem(NOT_FAV_STAR_DRAWABLE);
 
         // THEN
-        assertEquals(neighbourViewStateItemTest, result);
+        verify(repository).getDetailNeighbourInfo(NEIGHBOUR_ID);
+        verifyNoMoreInteractions(repository);
     }
 
     @Test

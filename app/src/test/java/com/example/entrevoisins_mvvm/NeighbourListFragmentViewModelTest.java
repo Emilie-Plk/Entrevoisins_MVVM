@@ -98,6 +98,7 @@ public class NeighbourListFragmentViewModelTest {
         // THEN
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(false));
         assertEquals(0, result.size());
+        verify(repository).getNeighbourEntitiesLiveData();
         verifyNoMoreInteractions(repository);
     }
 

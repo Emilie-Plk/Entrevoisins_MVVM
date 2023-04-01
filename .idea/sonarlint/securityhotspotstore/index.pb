@@ -3,8 +3,6 @@
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 t
 Dapp/src/main/java/com/example/entrevoisins_mvvm/MainApplication.java,c\0\c06e7f76066b73e96e9678f84c5553344c45c028
-P
- app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 u
 Eapp/src/main/java/com/example/entrevoisins_mvvm/data/AppDatabase.java,8\9\89850c3795ba50337a40186955308d1b207f1246
 â
@@ -13,12 +11,8 @@ Yapp/src/test/java/com/example/entrevoisins_mvvm/repositories/NeighbourRepositor
 Rapp/src/main/java/com/example/entrevoisins_mvvm/data/entities/NeighbourEntity.java,5\c\5c98ff2256323dfd72e7580a363125504c3c2786
 {
 Kapp/src/main/java/com/example/entrevoisins_mvvm/utils/ViewModelFactory.java,6\9\69404fd8bc6907478282d1545813b822b7fa4aae
-â
-Yapp/src/main/java/com/example/entrevoisins_mvvm/data/repository/NeighboursRepository.java,b\0\b0cca807baf9b4c383c4b27463f72fd4d3611aa4
 Ö
 Uapp/src/main/java/com/example/entrevoisins_mvvm/view/list/ListNeighboursActivity.java,1\d\1d167736a7320d9e6788fc1d929fc592ea2bd1e4
-ç
-]app/src/main/java/com/example/entrevoisins_mvvm/view/list/NeighbourListFragmentViewModel.java,e\4\e44f094e7d047ad96f8a84652c7735634c3cc5b3
 Ö
 Uapp/src/main/java/com/example/entrevoisins_mvvm/view/list/NeighbourViewStateItem.java,c\b\cb3b15f693b26019b63452531d5950ba8dd4702f
 Ñ
@@ -35,15 +29,25 @@ Tapp/src/main/java/com/example/entrevoisins_mvvm/view/list/NeighbourListFragment
 Oapp/src/main/java/com/example/entrevoisins_mvvm/config/BuildConfigResolver.java,6\a\6abc55a6a91b083e581badf70677a4feff05f457
 ç
 ]app/src/main/java/com/example/entrevoisins_mvvm/view/detail/DetailNeighbourViewStateItem.java,7\0\70e869e758aba7730938dc429055aad9ad76beee
-Ö
-Uapp/src/main/java/com/example/entrevoisins_mvvm/view/create/AddNeighbourActivity.java,0\e\0e9651bdee5137304e19102b72b54d1167e6151d
 É
 Sapp/src/androidTest/java/com/example/entrevoisins_mvvm/ExampleInstrumentedTest.java,6\2\6272a640af6210dbbe2993d59e70648f22ebf8d2
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
 Ç
 Rapp/src/androidTest/java/com/example/entrevoisins_mvvm/daoTest/utils/TestUtil.java,2\4\24acc00a155270ff420bd832496d6483b61659bc
 z
 Japp/src/main/java/com/example/entrevoisins_mvvm/data/dao/NeighbourDao.java,7\b\7bb1f08d0674c56a998988b463a2ce76658b6b90
 Ñ
 Tapp/src/androidTest/java/com/example/entrevoisins_mvvm/daoTest/NeighbourDaoTest.java,e\7\e7ba554137dff447e1d8153e2bede984c9178a2d
+s
+Capp/src/test/java/com/example/entrevoisins_mvvm/utils/TestUtil.java,8\b\8bd51e1c3132e27ccae6dfcec49ca36d78fb0feb
+w
+Gapp/src/test/java/com/example/entrevoisins_mvvm/utils/TestExecutor.java,c\6\c6b48bd7113a924c5ea010408243a2defc2b22af
+ê
+`app/src/main/java/com/example/entrevoisins_mvvm/view/detail/DetailProfileNeighbourViewModel.java,e\7\e7d80cfac27d287981d9bf833a10dc91c60e7ce6
+à
+Xapp/src/test/java/com/example/entrevoisins_mvvm/DetailProfileNeighbourViewModelTest.java,8\8\88b2994bf9fb29f5e3eefb87030960e659820887
+Ö
+Uapp/src/main/java/com/example/entrevoisins_mvvm/view/create/AddNeighbourActivity.java,0\e\0e9651bdee5137304e19102b72b54d1167e6151d
+è
+_app/src/main/java/com/example/entrevoisins_mvvm/view/detail/DetailProfileNeighbourActivity.java,b\b\bb7eba61f2cfd41fd4104876e426927daa94f6c0
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

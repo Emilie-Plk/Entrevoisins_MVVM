@@ -14,18 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/back_imagebtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="24dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/back_to_neighbours_list_descr"
-            android:elevation="2dp"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/neighbourProfilePic"
             android:layout_width="match_parent"

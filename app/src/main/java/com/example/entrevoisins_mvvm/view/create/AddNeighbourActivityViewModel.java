@@ -14,8 +14,8 @@ public class AddNeighbourActivityViewModel extends ViewModel {
     private final NeighboursRepository repository;
 
     // TODO: Maybe create a new object (List<String> or NeighbourData) to encapsulate all neighbour data?
-    private final String randomImageUrl;
-    private final MutableLiveData<String> randomImageUrlMutableLiveData = new MutableLiveData<>();
+    private final String randomImageUrl = "https://i.pravatar.cc/150?u=" + System.currentTimeMillis();
+    private final MutableLiveData<String> randomImageUrlMutableLiveData = new MutableLiveData<>(randomImageUrl);
 
     private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>("");
 
@@ -25,19 +25,18 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
     private final MutableLiveData<String> aboutMeMutableLiveData = new MutableLiveData<>("");
 
-    private final MutableLiveData<Boolean> isButtonEnabled = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> isButtonEnabledMutableLiveData = new MutableLiveData<>(false);
 
     private final SingleLiveEvent<Void> closeActivity = new SingleLiveEvent<>();
 
     public AddNeighbourActivityViewModel(@NonNull NeighboursRepository repository) {
         this.repository = repository;
-        randomImageUrl = "https://i.pravatar.cc/150?u=" + System.currentTimeMillis();
-        randomImageUrlMutableLiveData.setValue(randomImageUrl);
     }
 
 
     public void addNeighbour(String name, String address, String phoneNumber, String aboutMe) {
         // TODO: should I create the new NeighbourEntity here or in the fragment?
+        // TODO: wondering if that's the proper way to add a new neighbour (issue with UT and randomImg's url)
         repository.addNeighbour(
             new NeighbourEntity(
                 0,
@@ -59,12 +58,12 @@ public class AddNeighbourActivityViewModel extends ViewModel {
         return randomImageUrlMutableLiveData;
     }
 
-    public MutableLiveData<Boolean> getIsButtonEnabled() {
-        return isButtonEnabled;
+    public MutableLiveData<Boolean> getIsButtonEnabledMutableLiveData() {
+        return isButtonEnabledMutableLiveData;
     }
 
     private void updateForNeighbourInfoCompletion() {
-        isButtonEnabled.setValue(
+        isButtonEnabledMutableLiveData.setValue(
             // TODO: getValue() => not good except inside of combine()!
             !randomImageUrlMutableLiveData.getValue().isEmpty()
                 && !nameMutableLiveData.getValue().isEmpty()

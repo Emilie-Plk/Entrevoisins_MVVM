@@ -71,10 +71,10 @@ public class AddNeighbourActivityViewModelTest {
 
         // WHEN
         viewModel.addNeighbour(
-            neighbourEntity.getNeighbourName(),
-            neighbourEntity.getAddress(),
-            neighbourEntity.getPhoneNumber(),
-            neighbourEntity.getAboutMe()
+            NAME,
+            ADDRESS,
+            PHONE_NUMBER,
+            ABOUT_ME
         );
 
         // THEN
@@ -82,38 +82,44 @@ public class AddNeighbourActivityViewModelTest {
         verifyNoMoreInteractions(repository);
     }
 
+    @Test
+    public void nominal_case_imageUrl() {
+        String imageUrl = getValueForTesting(viewModel.getRandomImageUrl());
+        assertTrue(imageUrl.startsWith("https://i.pravatar.cc/150?u="));
+    }
+
     // region Field completion
     @Test
-    public void onNoFieldFilled() {
+    public void on_no_field_filled() {
         // WHEN
-        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
 
         // THEN
         assertFalse(isButtonEnabled);
     }
 
     @Test
-    public void onFieldAllFilled() {
+    public void on_field_all_filled() {
         // WHEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
         viewModel.setValueForPhoneNumber(PHONE_NUMBER);
         viewModel.setValueForAboutMe(ABOUT_ME);
-        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
 
         // THEN
         assertTrue(isButtonEnabled);
     }
 
     @Test
-    public void onFieldPartiallyFilled() {
+    public void on_field_partially_filled() {
         // WHEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
         viewModel.setValueForPhoneNumber("");
         viewModel.setValueForAboutMe(ABOUT_ME);
 
-        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
 
         // THEN
         assertFalse(isButtonEnabled);
@@ -131,7 +137,7 @@ public class AddNeighbourActivityViewModelTest {
         viewModel.setValueForPhoneNumber("");
 
         // THEN
-        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabled());
+        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
         assertFalse(isButtonEnabled);
     }
     // endregion

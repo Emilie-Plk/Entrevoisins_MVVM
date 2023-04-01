@@ -66,7 +66,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
                 .into(binding.avatar));
 
         // Button enabling's observer
-        viewModel.getIsButtonEnabled().observe(this, isEnabled ->
+        viewModel.getIsButtonEnabledMutableLiveData().observe(this, isEnabled ->
             binding.create.setEnabled(isEnabled)
         );
 

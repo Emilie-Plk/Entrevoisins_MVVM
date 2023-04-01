@@ -1,5 +1,6 @@
 package com.example.entrevoisins_mvvm.view.detail;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,12 +36,16 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         setViewModel();
 
         neighbourId = getIntent().getLongExtra(NEIGHBOUR_ID, -1);
 
         setupObservers();
-        setupClickListeners();
+        onAddFavoriteFabClickListener();
     }
 
     private void setupObservers() {
@@ -61,9 +66,8 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
         });
     }
 
-    private void setupClickListeners() {
+    private void onAddFavoriteFabClickListener() {
         binding.addFavoriteFab.setOnClickListener(v -> viewModel.onToggleNeighbourFavorite(neighbourId));
-        binding.backImagebtn.setOnClickListener(v -> finish());
     }
 
     private void setViewModel() {
