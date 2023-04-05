@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class AddNeighbourActivity extends AppCompatActivity {
     private ActivityAddNeighbourBinding binding;
 
-    private AddNeighbourActivityViewModel viewModel;
+    private AddNeighbourViewModel viewModel;
 
     public static Intent navigate(Context context) {
         return new Intent(context, AddNeighbourActivity.class);
@@ -45,7 +45,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
     private void setViewModel() {
         viewModel = new ViewModelProvider(
             this, ViewModelFactory.getInstance())
-            .get(AddNeighbourActivityViewModel.class);
+            .get(AddNeighbourViewModel.class);
     }
 
     private void checkForFieldsCompletion() {
@@ -71,7 +71,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
         );
 
         // Close activity's observer
-        viewModel.getCloseActivity().observe(this, closeActivity ->
+        viewModel.getCloseSingleLiveData().observe(this, closeActivity ->
             finish()
         );
     }

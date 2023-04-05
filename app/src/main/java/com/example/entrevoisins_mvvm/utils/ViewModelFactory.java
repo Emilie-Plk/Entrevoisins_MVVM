@@ -7,10 +7,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.entrevoisins_mvvm.MainApplication;
 import com.example.entrevoisins_mvvm.data.AppDatabase;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
-import com.example.entrevoisins_mvvm.view.create.AddNeighbourActivityViewModel;
+import com.example.entrevoisins_mvvm.view.create.AddNeighbourViewModel;
 import com.example.entrevoisins_mvvm.view.detail.DetailProfileNeighbourViewModel;
 import com.example.entrevoisins_mvvm.view.list.NeighbourListFragmentViewModel;
 
+import java.time.Clock;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -47,8 +48,11 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass.isAssignableFrom(NeighbourListFragmentViewModel.class)) {
             return (T) new NeighbourListFragmentViewModel(repository);
-        } else if (modelClass.isAssignableFrom(AddNeighbourActivityViewModel.class)) {
-            return (T) new AddNeighbourActivityViewModel(repository);
+        } else if (modelClass.isAssignableFrom(AddNeighbourViewModel.class)) {
+            return (T) new AddNeighbourViewModel(
+                repository,
+                Clock.systemDefaultZone()
+            );
         } else if (modelClass.isAssignableFrom(DetailProfileNeighbourViewModel.class)) {
             return (T) new DetailProfileNeighbourViewModel(repository, ioExecutor);
         } else
