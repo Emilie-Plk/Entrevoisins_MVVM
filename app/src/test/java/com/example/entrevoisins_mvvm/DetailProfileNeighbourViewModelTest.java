@@ -56,7 +56,6 @@ public class DetailProfileNeighbourViewModelTest {
         neighbourEntityMutableLiveData = new MutableLiveData<>();
 
         doReturn(neighbourEntityMutableLiveData).when(repository).getDetailNeighbourInfo(NEIGHBOUR_ID);
-        // TODO: why set the value of mutableLiveData now and not before line 48?
 
         neighbourEntityMutableLiveData.setValue(getNeighbourEntity(false));
 

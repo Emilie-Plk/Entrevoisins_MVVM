@@ -35,7 +35,6 @@ public class AddNeighbourActivityViewModel extends ViewModel {
 
 
     public void addNeighbour(String name, String address, String phoneNumber, String aboutMe) {
-        // TODO: should I create the new NeighbourEntity here or in the fragment?
         // TODO: wondering if that's the proper way to add a new neighbour (issue with UT and randomImg's url)
         repository.addNeighbour(
             new NeighbourEntity(

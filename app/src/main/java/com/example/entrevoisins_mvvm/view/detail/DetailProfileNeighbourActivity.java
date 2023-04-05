@@ -1,6 +1,5 @@
 package com.example.entrevoisins_mvvm.view.detail;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;

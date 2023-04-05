@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/ButterknifetoViewBinding/OpenClassrooms-master/Android/Entrevoisins" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/COPIE/OpenClassrooms-master/Android/Entrevoisins" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/P3/OpenClassrooms-master/Android/Entrevoisins" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/P3_des_autres" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/soyons fous/Entrevoisins" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../P3_mvvm" vcs="Git" />
   </component>

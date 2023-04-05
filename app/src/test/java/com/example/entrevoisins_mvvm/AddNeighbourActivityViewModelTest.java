@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.Observer;
 
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
@@ -31,6 +32,9 @@ public class AddNeighbourActivityViewModelTest {
 
     private AddNeighbourActivityViewModel viewModel;
 
+
+    @Mock
+    private Observer<Void> closeActivityObserver;
     private final static String NAME = "Usagi";
     private final static String ADDRESS = "Hawaii";
     private final static String PHONE_NUMBER = "123456789";
@@ -43,7 +47,7 @@ public class AddNeighbourActivityViewModelTest {
 
     @Test
     public void onAddingNewNeighbour_repositoryShouldAddNewNeighbour() {
-      /*  // GIVEN
+/*       // GIVEN
         NeighbourEntity neighbourEntity = mock(NeighbourEntity.class);
 
         // WHEN
@@ -58,6 +62,7 @@ public class AddNeighbourActivityViewModelTest {
         verify(repository).addNeighbour(neighbourEntity);
         verifyNoMoreInteractions(repository);*/
         // TODO: why a mock for NeighbourEntity doesn't work here?
+        // TODO: doesn't work on isolate, but fine when grouped?!
 
         // GIVEN
         NeighbourEntity neighbourEntity = new NeighbourEntity(
@@ -83,6 +88,26 @@ public class AddNeighbourActivityViewModelTest {
     }
 
     @Test
+    public void closeActivity_whenAddingNewNeighbour_closeActivityObserverShouldBeTriggeredOnce() {
+        // TODO: not sure at all about this (SingleLiveEvent testing)
+        // GIVEN
+        NeighbourEntity neighbourEntity = mock(NeighbourEntity.class);
+        viewModel.getCloseActivity().observeForever(closeActivityObserver);
+
+        // WHEN
+        viewModel.addNeighbour(
+            neighbourEntity.getNeighbourName(),
+            neighbourEntity.getAddress(),
+            neighbourEntity.getPhoneNumber(),
+            neighbourEntity.getAboutMe()
+        );
+
+        // THEN
+        verify(closeActivityObserver).onChanged(null);
+        verifyNoMoreInteractions(closeActivityObserver);
+    }
+
+    @Test
     public void nominal_case_imageUrl() {
         String imageUrl = getValueForTesting(viewModel.getRandomImageUrl());
         assertTrue(imageUrl.startsWith("https://i.pravatar.cc/150?u="));
@@ -99,7 +124,7 @@ public class AddNeighbourActivityViewModelTest {
     }
 
     @Test
-    public void on_field_all_filled() {
+    public void on_fields_all_filled() {
         // WHEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
@@ -112,7 +137,7 @@ public class AddNeighbourActivityViewModelTest {
     }
 
     @Test
-    public void on_field_partially_filled() {
+    public void on_fields_partially_filled() {
         // WHEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);

@@ -56,7 +56,6 @@ public class NeighbourListFragmentViewModelTest {
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(false));
 
         // THEN
-        // TODO: why should the assertion be declared BEFORE the verification?
         assertEquals(3, result.size());
         verify(repository).getNeighbourEntitiesLiveData();
         verifyNoMoreInteractions(repository);
