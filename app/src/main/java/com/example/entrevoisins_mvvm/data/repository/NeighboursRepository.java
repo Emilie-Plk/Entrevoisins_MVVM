@@ -1,5 +1,6 @@
 package com.example.entrevoisins_mvvm.data.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.example.entrevoisins_mvvm.data.dao.NeighbourDao;
@@ -14,17 +15,18 @@ public class NeighboursRepository {
 
     private final Executor executor;
 
-    public NeighboursRepository(NeighbourDao dao, Executor executor) {
-   /*
-   // TODO: didn't use it, didn't really get it!..
-      if (buildConfigResolver.isDebug()) {
-            generateNeighbours();
-        }*/
+    public NeighboursRepository(
+        @NonNull NeighbourDao dao,
+        @NonNull Executor executor
+        ) {
+//      if (buildConfigResolver.isDebug()) {
+//            generateNeighbours();
+//        }
         this.dao = dao;
         this.executor = executor;
     }
 
-    public void addNeighbour(NeighbourEntity neighbour) {
+    public void addNeighbour(@NonNull NeighbourEntity neighbour) {
         executor.execute(() ->
             dao.insertNeighbour(neighbour));
     }

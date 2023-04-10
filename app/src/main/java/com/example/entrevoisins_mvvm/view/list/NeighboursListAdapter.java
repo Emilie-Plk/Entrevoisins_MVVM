@@ -49,7 +49,10 @@ public class NeighboursListAdapter extends ListAdapter<NeighbourViewStateItem, N
             deleteNeighbourBtn = binding.itemListDeleteButton;
         }
 
-        public void bind(NeighbourViewStateItem item, OnNeighbourClickedListener listener) {
+        public void bind(
+            @NonNull NeighbourViewStateItem item,
+            @NonNull OnNeighbourClickedListener listener
+        ) {
             itemView.setOnClickListener(v -> listener.onNeighbourClicked(item.getId()));
 
             Glide.with(itemView.getContext())
@@ -65,12 +68,18 @@ public class NeighboursListAdapter extends ListAdapter<NeighbourViewStateItem, N
 
     private static class ListNeighbourItemCallback extends DiffUtil.ItemCallback<NeighbourViewStateItem> {
         @Override
-        public boolean areItemsTheSame(@NonNull NeighbourViewStateItem oldItem, @NonNull NeighbourViewStateItem newItem) {
+        public boolean areItemsTheSame(
+            @NonNull NeighbourViewStateItem oldItem,
+            @NonNull NeighbourViewStateItem newItem
+        ) {
             return oldItem.getId() == newItem.getId();
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull NeighbourViewStateItem oldItem, @NonNull NeighbourViewStateItem newItem) {
+        public boolean areContentsTheSame(
+            @NonNull NeighbourViewStateItem oldItem,
+            @NonNull NeighbourViewStateItem newItem
+        ) {
             return oldItem.equals(newItem);
         }
     }

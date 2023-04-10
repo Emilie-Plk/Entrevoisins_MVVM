@@ -22,7 +22,8 @@ public class DetailProfileNeighbourViewModel extends ViewModel {
 
     public DetailProfileNeighbourViewModel(
         @NonNull NeighboursRepository repository,
-        @NonNull Executor ioExecutor) {
+        @NonNull Executor ioExecutor
+    ) {
         this.repository = repository;
         this.ioExecutor = ioExecutor;
     }

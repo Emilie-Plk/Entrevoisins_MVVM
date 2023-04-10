@@ -9,7 +9,7 @@ import com.example.entrevoisins_mvvm.data.AppDatabase;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 import com.example.entrevoisins_mvvm.view.create.AddNeighbourViewModel;
 import com.example.entrevoisins_mvvm.view.detail.DetailProfileNeighbourViewModel;
-import com.example.entrevoisins_mvvm.view.list.NeighbourListFragmentViewModel;
+import com.example.entrevoisins_mvvm.view.list.NeighbourListViewModel;
 
 import java.time.Clock;
 import java.util.concurrent.Executor;
@@ -46,15 +46,18 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(NeighbourListFragmentViewModel.class)) {
-            return (T) new NeighbourListFragmentViewModel(repository);
+        if (modelClass.isAssignableFrom(NeighbourListViewModel.class)) {
+            return (T) new NeighbourListViewModel(repository);
         } else if (modelClass.isAssignableFrom(AddNeighbourViewModel.class)) {
             return (T) new AddNeighbourViewModel(
                 repository,
                 Clock.systemDefaultZone()
             );
         } else if (modelClass.isAssignableFrom(DetailProfileNeighbourViewModel.class)) {
-            return (T) new DetailProfileNeighbourViewModel(repository, ioExecutor);
+            return (T) new DetailProfileNeighbourViewModel(
+                repository,
+                ioExecutor
+            );
         } else
             throw new IllegalArgumentException("Unknown model class!");
     }

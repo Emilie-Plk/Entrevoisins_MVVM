@@ -43,8 +43,12 @@ public class AddNeighbourViewModel extends ViewModel {
         randomImageUrlMutableLiveData = new MutableLiveData<>(randomImageUrl);
     }
 
-    public void addNeighbour(@NonNull String name, @NonNull String address, @NonNull String phoneNumber, @NonNull String aboutMe) {
-        // TODO: wondering if that's the proper way to add a new neighbour (issue with UT and randomImg's url)
+    public void addNeighbour(
+        @NonNull String name,
+        @NonNull String address,
+        @NonNull String phoneNumber,
+        @NonNull String aboutMe
+    ) {
         repository.addNeighbour(
             new NeighbourEntity(
                 0,
@@ -71,7 +75,7 @@ public class AddNeighbourViewModel extends ViewModel {
         return isButtonEnabledMutableLiveData;
     }
 
-    private void updateForNeighbourInfoCompletion() {
+    private void updateIsButtonEnabledMutableLiveData() {
         isButtonEnabledMutableLiveData.setValue(
             // TODO: getValue() => not good except inside of combine()!
             !randomImageUrlMutableLiveData.getValue().isEmpty()
@@ -82,24 +86,24 @@ public class AddNeighbourViewModel extends ViewModel {
         );
     }
 
-    private void setValueForCompletion(MutableLiveData<String> mutableLiveData, String value) {
+    private void setValueForCompletion(@NonNull MutableLiveData<String> mutableLiveData, @NonNull String value) {
         mutableLiveData.setValue(value);
-        updateForNeighbourInfoCompletion();
+        updateIsButtonEnabledMutableLiveData();
     }
 
-    public void setValueForName(String name) {
+    public void setValueForName(@NonNull String name) {
         setValueForCompletion(nameMutableLiveData, name);
     }
 
-    public void setValueForAddress(String address) {
+    public void setValueForAddress(@NonNull String address) {
         setValueForCompletion(addressMutableLiveData, address);
     }
 
-    public void setValueForPhoneNumber(String phoneNumber) {
+    public void setValueForPhoneNumber(@NonNull String phoneNumber) {
         setValueForCompletion(phoneNumberMutableLiveData, phoneNumber);
     }
 
-    public void setValueForAboutMe(String aboutMe) {
+    public void setValueForAboutMe(@NonNull String aboutMe) {
         setValueForCompletion(aboutMeMutableLiveData, aboutMe);
     }
 }

@@ -11,12 +11,12 @@ import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NeighbourListFragmentViewModel extends ViewModel {
+public class NeighbourListViewModel extends ViewModel {
 
     @NonNull
     private final NeighboursRepository repository;
 
-    public NeighbourListFragmentViewModel(@NonNull NeighboursRepository repository) {
+    public NeighbourListViewModel(@NonNull NeighboursRepository repository) {
         this.repository = repository;
     }
 

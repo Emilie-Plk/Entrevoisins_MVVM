@@ -83,4 +83,17 @@ public class DetailNeighbourViewStateItem {
     public int hashCode() {
         return Objects.hash(name, avatarUrl, address, phoneNumber, aboutMe, favoriteDrawable);
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "DetailNeighbourViewStateItem{" +
+            "name='" + name + '\'' +
+            ", avatarUrl='" + avatarUrl + '\'' +
+            ", address='" + address + '\'' +
+            ", phoneNumber='" + phoneNumber + '\'' +
+            ", aboutMe='" + aboutMe + '\'' +
+            ", favoriteDrawable=" + favoriteDrawable +
+            '}';
+    }
 }

@@ -14,7 +14,11 @@ public class NeighbourViewStateItem {
     @NonNull
     private final String avatarUrl;
 
-    public NeighbourViewStateItem(long id, @NonNull String name, @NonNull String avatarUrl) {
+    public NeighbourViewStateItem(
+        long id,
+        @NonNull String name,
+        @NonNull String avatarUrl
+    ) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;

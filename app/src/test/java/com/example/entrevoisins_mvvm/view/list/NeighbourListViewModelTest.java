@@ -1,4 +1,4 @@
-package com.example.entrevoisins_mvvm;
+package com.example.entrevoisins_mvvm.view.list;
 
 import static com.example.entrevoisins_mvvm.utils.TestUtil.getValueForTesting;
 import static org.junit.Assert.assertEquals;
@@ -12,8 +12,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
-import com.example.entrevoisins_mvvm.view.list.NeighbourListFragmentViewModel;
-import com.example.entrevoisins_mvvm.view.list.NeighbourViewStateItem;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -25,18 +23,16 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(MockitoJUnitRunner.class)
-public class NeighbourListFragmentViewModelTest {
-
-    @Mock
-    private NeighboursRepository repository = mock(NeighboursRepository.class);
-
-    private NeighbourListFragmentViewModel viewModel;
-
-    private MutableLiveData<List<NeighbourEntity>> neighbourListMutableLiveData;
+public class NeighbourListViewModelTest {
 
     @Rule
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
+
+    private final NeighboursRepository repository = mock(NeighboursRepository.class);
+
+    private NeighbourListViewModel viewModel;
+
+    private MutableLiveData<List<NeighbourEntity>> neighbourListMutableLiveData;
 
     @Before
     public void setUp() {
@@ -47,7 +43,7 @@ public class NeighbourListFragmentViewModelTest {
         List<NeighbourEntity> dummyNeighbourList = getNeighbourListTest();
         neighbourListMutableLiveData.setValue(dummyNeighbourList);
 
-        viewModel = new NeighbourListFragmentViewModel(repository);
+        viewModel = new NeighbourListViewModel(repository);
     }
 
     @Test

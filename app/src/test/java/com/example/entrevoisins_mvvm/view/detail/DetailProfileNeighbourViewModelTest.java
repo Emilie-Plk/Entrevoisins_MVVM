@@ -1,4 +1,4 @@
-package com.example.entrevoisins_mvvm;
+package com.example.entrevoisins_mvvm.view.detail;
 
 import static com.example.entrevoisins_mvvm.utils.TestUtil.getValueForTesting;
 import static org.junit.Assert.assertEquals;
@@ -11,11 +11,10 @@ import androidx.annotation.DrawableRes;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.entrevoisins_mvvm.R;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 import com.example.entrevoisins_mvvm.utils.TestExecutor;
-import com.example.entrevoisins_mvvm.view.detail.DetailNeighbourViewStateItem;
-import com.example.entrevoisins_mvvm.view.detail.DetailProfileNeighbourViewModel;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -24,13 +23,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-@RunWith(MockitoJUnitRunner.class)
 public class DetailProfileNeighbourViewModelTest {
 
     @Rule
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
-    @Mock
-    private NeighboursRepository repository = mock(NeighboursRepository.class);
+
+    private final NeighboursRepository repository = mock(NeighboursRepository.class);
 
     private MutableLiveData<NeighbourEntity> neighbourEntityMutableLiveData;
 

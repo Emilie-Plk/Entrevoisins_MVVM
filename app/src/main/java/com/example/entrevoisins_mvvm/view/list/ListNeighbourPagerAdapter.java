@@ -19,7 +19,10 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     private final Context context;
 
-    public ListNeighbourPagerAdapter(@NonNull Context context, @NonNull FragmentManager fm) {
+    public ListNeighbourPagerAdapter(
+        @NonNull Context context,
+        @NonNull FragmentManager fm
+    ) {
         super(fm);
         this.context = context;
     }
