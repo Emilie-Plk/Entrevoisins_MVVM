@@ -16,9 +16,6 @@ import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +37,14 @@ public class NeighbourListViewModelTest {
 
         doReturn(neighbourListMutableLiveData).when(repository).getNeighbourEntitiesLiveData();
 
-        List<NeighbourEntity> dummyNeighbourList = getNeighbourListTest();
+        List<NeighbourEntity> dummyNeighbourList = getNoFavoriteNeighbourListTest();
         neighbourListMutableLiveData.setValue(dummyNeighbourList);
 
         viewModel = new NeighbourListViewModel(repository);
     }
 
     @Test
-    public void nominalCase() {
+    public void nominal_case() {
         // WHEN
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(false));
 
@@ -58,7 +55,7 @@ public class NeighbourListViewModelTest {
     }
 
     @Test
-    public void nominalCase_givesNoFavoriteNeighbours() {
+    public void nominal_case_neighbours_not_fav_by_default() {
         // WHEN
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(true));
 
@@ -69,9 +66,9 @@ public class NeighbourListViewModelTest {
     }
 
     @Test
-    public void onOneFavoriteNeighbour_verifyRepositoryAddsGFavoriteNeighbour() {
+    public void nominal_case_one_favorite_neighbour() {
         // GIVEN
-        neighbourListMutableLiveData.setValue(getNeighbourWithFavListTest());
+        neighbourListMutableLiveData.setValue(getNeighbourWithFirstOneFavoriteListTest());
 
         // WHEN
         List<NeighbourViewStateItem> result = getValueForTesting(viewModel.getNeighbourViewStateItemLiveData(true));
@@ -83,7 +80,7 @@ public class NeighbourListViewModelTest {
     }
 
     @Test
-    public void edgeCase_noNeighbour() {
+    public void edge_case_no_neighbour() {
         // GIVEN
         List<NeighbourEntity> emptyTaskList = new ArrayList<>();
 
@@ -98,7 +95,7 @@ public class NeighbourListViewModelTest {
     }
 
     @Test
-    public void onDeleteGivenNeighbour_verifyRepositoryDeletesGivenNeighbour() {
+    public void nominal_case_delete_one_neighbour() {
         // GIVEN
         long neighbourId = 1;
 
@@ -111,7 +108,7 @@ public class NeighbourListViewModelTest {
     }
 
     //region helper methods
-    private List<NeighbourEntity> getNeighbourListTest() {
+    private List<NeighbourEntity> getNoFavoriteNeighbourListTest() {
         List<NeighbourEntity> neighbourEntityList = new ArrayList<>();
         neighbourEntityList.add(
             new NeighbourEntity(
@@ -146,7 +143,7 @@ public class NeighbourListViewModelTest {
         return neighbourEntityList;
     }
 
-    private List<NeighbourEntity> getNeighbourWithFavListTest() {
+    private List<NeighbourEntity> getNeighbourWithFirstOneFavoriteListTest() {
         List<NeighbourEntity> neighbourEntityList = new ArrayList<>();
         neighbourEntityList.add(
             new NeighbourEntity(

@@ -61,11 +61,13 @@ public class NeighbourDaoTest {
 
     @Test
     public void insert_one_neighbour() {
-        // WHEN
+        // GIVEN
         neighbourDao.insertNeighbour(NEIGHBOUR_ENTITY);
 
+        // WHEN
         List<NeighbourEntity> result = getValueForTesting(neighbourDao.getNeighbourEntities());
 
+        // THEN
         assertEquals(1, result.size());
     }
 
@@ -120,12 +122,12 @@ public class NeighbourDaoTest {
 
         // WHEN
         neighbourDao.updateFavorite(NEIGHBOUR_ENTITY.getId(), !NEIGHBOUR_ENTITY.isFavorite());
-        NeighbourEntity resultAfterOnce = neighbourDao.getNeighbour(NEIGHBOUR_ENTITY.getId());
-        assertTrue(resultAfterOnce.isFavorite());
+        NeighbourEntity resultAfterFavOnce = neighbourDao.getNeighbour(NEIGHBOUR_ENTITY.getId());
+        assertTrue(resultAfterFavOnce.isFavorite());
 
         // WHEN
         // TODO: not sure it's correct to do it so
-        neighbourDao.updateFavorite(NEIGHBOUR_ENTITY.getId(), !resultAfterOnce.isFavorite());
+        neighbourDao.updateFavorite(NEIGHBOUR_ENTITY.getId(), !resultAfterFavOnce.isFavorite());
         NeighbourEntity result = neighbourDao.getNeighbour(NEIGHBOUR_ENTITY.getId());
         assertFalse(result.isFavorite());
     }

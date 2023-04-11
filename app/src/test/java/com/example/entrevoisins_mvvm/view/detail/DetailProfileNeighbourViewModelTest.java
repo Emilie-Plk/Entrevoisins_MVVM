@@ -19,9 +19,10 @@ import com.example.entrevoisins_mvvm.utils.TestExecutor;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
 
 public class DetailProfileNeighbourViewModelTest {
 
@@ -65,7 +66,7 @@ public class DetailProfileNeighbourViewModelTest {
     @Test
     public void nominal_case() {
         // WHEN
-        DetailNeighbourViewStateItem result = getValueForTesting(viewModel.getDetailNeighbourViewStateItem(NEIGHBOUR_ID));
+        viewModel.getDetailNeighbourViewStateItem(NEIGHBOUR_ID);
 
         // THEN
         verify(repository).getDetailNeighbourInfo(NEIGHBOUR_ID);
@@ -73,7 +74,24 @@ public class DetailProfileNeighbourViewModelTest {
     }
 
     @Test
-    public void case_neighbour_is_favorite() {
+    public void nominal_case_neighbour_is_not_favorite() {
+        // GIVEN
+        neighbourEntityMutableLiveData.setValue(getNeighbourEntity(false));
+
+        // WHEN
+        DetailNeighbourViewStateItem result = getValueForTesting(viewModel.getDetailNeighbourViewStateItem(NEIGHBOUR_ID));
+        DetailNeighbourViewStateItem neighbourViewStateItemTest = getNeighbourViewStateItem(NOT_FAV_STAR_DRAWABLE);
+
+        // THEN
+        assertEquals(neighbourViewStateItemTest.getName(), result.getName());
+        assertEquals(neighbourViewStateItemTest.getAddress(), result.getAddress());
+        assertEquals(neighbourViewStateItemTest.getPhoneNumber(), result.getPhoneNumber());
+        assertEquals(neighbourViewStateItemTest.getAboutMe(), result.getAboutMe());
+        assertEquals(neighbourViewStateItemTest.getFavoriteDrawable(), result.getFavoriteDrawable());
+    }
+
+    @Test
+    public void nominal_case_neighbour_is_favorite() {
         // GIVEN
         neighbourEntityMutableLiveData.setValue(getNeighbourEntity(true));
 
@@ -90,7 +108,7 @@ public class DetailProfileNeighbourViewModelTest {
     }
 
     @Test
-    public void on_toggle_neighbour_favorite() {
+    public void nominal_case_on_toggle_neighbour_favorite() {
         // WHEN
         viewModel.onToggleNeighbourFavorite(NEIGHBOUR_ID);
 
@@ -100,13 +118,13 @@ public class DetailProfileNeighbourViewModelTest {
         verifyNoMoreInteractions(repository);
     }
 
-    // region helper method
+    // region helper methods
     private NeighbourEntity getNeighbourEntity(boolean isFavorite) {
         return new NeighbourEntity(
             1,
             isFavorite,
             "Usagi",
-            "https://i.pravatar.cc/150?u=" + System.currentTimeMillis(),
+            "https://i.pravatar.cc/150?u=" + Clock.fixed(Instant.ofEpochMilli(1681110562L), ZoneOffset.UTC),
             "Hawaii",
             "123456789",
             "My favorite song is The Matte Kudasai");

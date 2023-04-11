@@ -45,7 +45,7 @@ public class AddNeighbourViewModelTest {
     }
 
     @Test
-    public void addNeighbour_nominal_case() {
+    public void nominal_case_addNeighbour() {
         // WHEN
         viewModel.addNeighbour(
             NAME,
@@ -93,7 +93,7 @@ public class AddNeighbourViewModelTest {
 
 
     @Test
-    public void on_fields_all_filled() {
+    public void nominal_case_isButtonEnabledMutableLiveData_on_all_fields_filled() {
         // WHEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
@@ -106,7 +106,7 @@ public class AddNeighbourViewModelTest {
     }
 
     @Test
-    public void on_fields_partially_filled() {
+    public void nominal_case_isButtonEnabledMutableLiveData_on_fields_partially_filled() {
         // WHEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
@@ -120,7 +120,7 @@ public class AddNeighbourViewModelTest {
     }
 
     @Test
-    public void onAllFieldsFilled_whenOneFieldEmptied_shouldReturnFalse() {
+    public void nominal_case_isButtonEnabledMutableLiveData_on_all_fields_filled_then_one_field_emptied() {
         // GIVEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);

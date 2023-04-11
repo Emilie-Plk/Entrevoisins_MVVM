@@ -11,17 +11,16 @@ import java.util.concurrent.Executor;
 
 public class NeighboursRepository {
 
+    @NonNull
     private final NeighbourDao dao;
-
+    @NonNull
     private final Executor executor;
+
 
     public NeighboursRepository(
         @NonNull NeighbourDao dao,
         @NonNull Executor executor
-        ) {
-//      if (buildConfigResolver.isDebug()) {
-//            generateNeighbours();
-//        }
+    ) {
         this.dao = dao;
         this.executor = executor;
     }
