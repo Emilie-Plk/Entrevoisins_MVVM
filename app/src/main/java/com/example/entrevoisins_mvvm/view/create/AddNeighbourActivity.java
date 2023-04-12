@@ -8,44 +8,45 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.entrevoisins_mvvm.databinding.ActivityAddNeighbourBinding;
-import com.example.entrevoisins_mvvm.utils.ViewModelFactory;
+import com.example.entrevoisins_mvvm.databinding.AddNeighbourActivityBinding;
 
 import java.util.function.Consumer;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class AddNeighbourActivity extends AppCompatActivity {
-    private ActivityAddNeighbourBinding binding;
+    private AddNeighbourActivityBinding binding;
 
     private AddNeighbourViewModel viewModel;
 
-    public static Intent navigate(Context context) {
+    public static Intent navigate(@NonNull Context context) {
         return new Intent(context, AddNeighbourActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddNeighbourBinding.inflate(getLayoutInflater());
+        binding = AddNeighbourActivityBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
         setViewModel();
-        checkForFieldsCompletion();
         setupObservers();
+        checkForFieldsCompletion();
         addNewNeighbour();
     }
 
 
     private void setViewModel() {
-        viewModel = new ViewModelProvider(
-            this, ViewModelFactory.getInstance())
-            .get(AddNeighbourViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AddNeighbourViewModel.class);
     }
 
     private void checkForFieldsCompletion() {
@@ -63,10 +64,11 @@ public class AddNeighbourActivity extends AppCompatActivity {
                 .load(imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(RequestOptions.circleCropTransform())
-                .into(binding.avatar));
+                .into(binding.avatar)
+        );
 
         // Button enabling's observer
-        viewModel.getIsButtonEnabledMutableLiveData().observe(this, isEnabled ->
+        viewModel.getIsButtonEnabledMediatorLiveData().observe(this, isEnabled ->
             binding.create.setEnabled(isEnabled)
         );
 
@@ -88,7 +90,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
         );
     }
 
-    private void addTextWatcher(EditText editText, Consumer<String> valueSetter) {
+    private void addTextWatcher(@NonNull EditText editText, @NonNull Consumer<String> valueSetter) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

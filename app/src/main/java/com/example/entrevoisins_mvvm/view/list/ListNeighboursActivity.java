@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.entrevoisins_mvvm.databinding.ListNeighboursActivityBinding;
 import com.example.entrevoisins_mvvm.view.create.AddNeighbourActivity;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class ListNeighboursActivity extends AppCompatActivity {
 
     @Override

@@ -11,6 +11,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
+import com.example.entrevoisins_mvvm.utils.TestExecutor;
 import com.example.entrevoisins_mvvm.utils.TestUtil;
 
 import org.junit.Before;
@@ -41,11 +42,11 @@ public class AddNeighbourViewModelTest {
 
     @Before
     public void setUp() {
-        viewModel = new AddNeighbourViewModel(repository, clock);
+        viewModel = new AddNeighbourViewModel(repository, new TestExecutor(), clock);
     }
 
     @Test
-    public void addNeighbour_nominal_case() {
+    public void nominal_case_addNeighbour() {
         // WHEN
         viewModel.addNeighbour(
             NAME,
@@ -70,85 +71,70 @@ public class AddNeighbourViewModelTest {
         );
         verifyNoMoreInteractions(repository);
     }
-//
-//    @Test
-//    public void closeActivity_whenAddingNewNeighbour_closeActivityObserverShouldBeTriggeredOnce() {
-//        // TODO: not sure at all about this (SingleLiveEvent testing)
-//        // GIVEN
-//        NeighbourEntity neighbourEntity = mock(NeighbourEntity.class);
-//        viewModel.getCloseActivity().observeForever(closeActivityObserver);
-//
-//        // WHEN
-//        viewModel.addNeighbour(
-//            neighbourEntity.getNeighbourName(),
-//            neighbourEntity.getAddress(),
-//            neighbourEntity.getPhoneNumber(),
-//            neighbourEntity.getAboutMe()
-//        );
-//
-//        // THEN
-//        verify(closeActivityObserver).onChanged(null);
-//        verifyNoMoreInteractions(closeActivityObserver);
-//    }
-//
-//    @Test
-//    public void nominal_case_imageUrl() {
-//        String imageUrl = getValueForTesting(viewModel.getRandomImageUrl());
-//        assertTrue(imageUrl.startsWith("https://i.pravatar.cc/150?u="));
-//    }
-//
-//    // region Field completion
-//    @Test
-//    public void on_no_field_filled() {
-//        // WHEN
-//        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
-//
-//        // THEN
-//        assertFalse(isButtonEnabled);
-//    }
-//
-//    @Test
-//    public void on_fields_all_filled() {
-//        // WHEN
-//        viewModel.setValueForName(NAME);
-//        viewModel.setValueForAddress(ADDRESS);
-//        viewModel.setValueForPhoneNumber(PHONE_NUMBER);
-//        viewModel.setValueForAboutMe(ABOUT_ME);
-//        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
-//
-//        // THEN
-//        assertTrue(isButtonEnabled);
-//    }
-//
-//    @Test
-//    public void on_fields_partially_filled() {
-//        // WHEN
-//        viewModel.setValueForName(NAME);
-//        viewModel.setValueForAddress(ADDRESS);
-//        viewModel.setValueForPhoneNumber("");
-//        viewModel.setValueForAboutMe(ABOUT_ME);
-//
-//        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
-//
-//        // THEN
-//        assertFalse(isButtonEnabled);
-//    }
-//
-//    @Test
-//    public void onAllFieldsFilled_whenOneFieldEmptied_shouldReturnFalse() {
-//        // GIVEN
-//        viewModel.setValueForName(NAME);
-//        viewModel.setValueForAddress(ADDRESS);
-//        viewModel.setValueForPhoneNumber(PHONE_NUMBER);
-//        viewModel.setValueForAboutMe(ABOUT_ME);
-//
-//        // WHEN
-//        viewModel.setValueForPhoneNumber("");
-//
-//        // THEN
-//        boolean isButtonEnabled = getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
-//        assertFalse(isButtonEnabled);
-//    }
-//    // endregion
+
+    @Test
+    public void nominal_case_imageUrl() {
+        // WHEN
+        String imageUrl = TestUtil.getValueForTesting(viewModel.getRandomImageUrl());
+
+        // THEN
+        assertEquals(imageUrl, "https://i.pravatar.cc/150?u=" + EPOCH_MILLI);
+    }
+
+
+    // region Field completion
+    @Test
+    public void nominal_case_isButtonEnabledMutableLiveData() {
+        // WHEN
+        Boolean isButtonEnabledMutableLiveData = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+
+        // THEN
+        assertFalse(isButtonEnabledMutableLiveData);
+    }
+
+
+    @Test
+    public void nominal_case_isButtonEnabledMutableLiveData_on_all_fields_filled() {
+        // WHEN
+        viewModel.setValueForName(NAME);
+        viewModel.setValueForAddress(ADDRESS);
+        viewModel.setValueForPhoneNumber(PHONE_NUMBER);
+        viewModel.setValueForAboutMe(ABOUT_ME);
+        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+
+        // THEN
+        assertTrue(isButtonEnabled);
+    }
+
+    @Test
+    public void nominal_case_isButtonEnabledMutableLiveData_on_fields_partially_filled() {
+        // WHEN
+        viewModel.setValueForName(NAME);
+        viewModel.setValueForAddress(ADDRESS);
+        viewModel.setValueForPhoneNumber("");
+        viewModel.setValueForAboutMe(ABOUT_ME);
+
+        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+
+        // THEN
+        assertFalse(isButtonEnabled);
+    }
+
+    @Test
+    public void nominal_case_isButtonEnabledMutableLiveData_on_all_fields_filled_then_one_field_emptied() {
+        // GIVEN
+        viewModel.setValueForName(NAME);
+        viewModel.setValueForAddress(ADDRESS);
+        viewModel.setValueForPhoneNumber(PHONE_NUMBER);
+        viewModel.setValueForAboutMe(ABOUT_ME);
+
+        // WHEN
+        viewModel.setValueForPhoneNumber("");
+
+        // THEN
+        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+        assertFalse(isButtonEnabled);
+    }
+    // endregion
 
 }

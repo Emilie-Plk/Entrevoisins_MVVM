@@ -13,16 +13,17 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.entrevoisins_mvvm.databinding.FragmentNeighbourListBinding;
-import com.example.entrevoisins_mvvm.utils.ViewModelFactory;
+import com.example.entrevoisins_mvvm.databinding.NeighbourListFragmentBinding;
 import com.example.entrevoisins_mvvm.view.detail.DetailProfileNeighbourActivity;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class NeighbourListFragment extends Fragment {
 
-    private NeighbourListFragmentViewModel viewModel;
+    private NeighbourListViewModel viewModel;
 
-    private FragmentNeighbourListBinding binding;
+    private NeighbourListFragmentBinding binding;
 
     @NonNull
     private static final String IS_FAV = "IS_FAV";
@@ -37,19 +38,26 @@ public class NeighbourListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentNeighbourListBinding.inflate(inflater, container, false);
+    public View onCreateView(
+        @NonNull LayoutInflater inflater,
+        ViewGroup container,
+        Bundle savedInstanceState
+    ) {
+        binding = NeighbourListFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(
+        @NonNull View view,
+        @Nullable Bundle savedInstanceState
+    ) {
         setUpViewModel();
         initRecyclerView();
     }
 
     private void setUpViewModel() {
-        viewModel = new ViewModelProvider(requireActivity(), ViewModelFactory.getInstance()).get(NeighbourListFragmentViewModel.class);
+        viewModel = new ViewModelProvider(this).get(NeighbourListViewModel.class);
     }
 
     private void initRecyclerView() {

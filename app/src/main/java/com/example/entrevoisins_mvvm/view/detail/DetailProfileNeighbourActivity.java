@@ -10,13 +10,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.entrevoisins_mvvm.R;
-import com.example.entrevoisins_mvvm.databinding.ActivityDetailProfileNeighbourBinding;
-import com.example.entrevoisins_mvvm.utils.ViewModelFactory;
+import com.example.entrevoisins_mvvm.databinding.DetailProfileNeighbourFragmentBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class DetailProfileNeighbourActivity extends AppCompatActivity {
 
     private static final String NEIGHBOUR_ID = "NEIGHBOUR_ID";
-    private ActivityDetailProfileNeighbourBinding binding;
+    private DetailProfileNeighbourFragmentBinding binding;
 
     private DetailProfileNeighbourViewModel viewModel;
 
@@ -31,7 +33,7 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityDetailProfileNeighbourBinding.inflate(getLayoutInflater());
+        binding = DetailProfileNeighbourFragmentBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -70,7 +72,6 @@ public class DetailProfileNeighbourActivity extends AppCompatActivity {
     }
 
     private void setViewModel() {
-        viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance())
-            .get(DetailProfileNeighbourViewModel.class);
+        viewModel = new ViewModelProvider(this).get(DetailProfileNeighbourViewModel.class);
     }
 }
