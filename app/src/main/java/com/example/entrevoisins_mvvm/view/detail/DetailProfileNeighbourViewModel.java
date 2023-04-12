@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.example.entrevoisins_mvvm.DI.DatabaseModule;
+import com.example.entrevoisins_mvvm.DI.AppModule;
 import com.example.entrevoisins_mvvm.R;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
@@ -29,7 +29,7 @@ public class DetailProfileNeighbourViewModel extends ViewModel {
     @Inject
     public DetailProfileNeighbourViewModel(
         @NonNull NeighboursRepository repository,
-        @NonNull @DatabaseModule.IoExecutor Executor ioExecutor
+        @NonNull @AppModule.IoExecutor Executor ioExecutor
     ) {
         this.repository = repository;
         this.ioExecutor = ioExecutor;

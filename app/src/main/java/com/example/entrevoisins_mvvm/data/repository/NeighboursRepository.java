@@ -9,7 +9,6 @@ import com.example.entrevoisins_mvvm.data.dao.NeighbourDao;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 
 import java.util.List;
-import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,7 +19,7 @@ public class NeighboursRepository {
     @NonNull
     private final NeighbourDao dao;
 
-@Inject
+    @Inject
     public NeighboursRepository(
         @NonNull NeighbourDao dao
     ) {
@@ -29,12 +28,12 @@ public class NeighboursRepository {
 
     @WorkerThread
     public void addNeighbour(@NonNull NeighbourEntity neighbour) {
-            dao.insertNeighbour(neighbour);
+        dao.insertNeighbour(neighbour);
     }
 
     @WorkerThread
     public void deleteNeighbour(long neighbourID) {
-            dao.deleteNeighbour(neighbourID);
+        dao.deleteNeighbour(neighbourID);
     }
 
     @MainThread
@@ -44,7 +43,7 @@ public class NeighboursRepository {
 
     @WorkerThread
     public void updateFavorite(long neighbourId, boolean isFavorite) {
-            dao.updateFavorite(neighbourId, isFavorite);
+        dao.updateFavorite(neighbourId, isFavorite);
     }
 
     @MainThread

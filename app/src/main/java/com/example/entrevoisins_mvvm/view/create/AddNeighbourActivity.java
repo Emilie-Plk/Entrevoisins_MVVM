@@ -57,20 +57,16 @@ public class AddNeighbourActivity extends AppCompatActivity {
     }
 
     private void setupObservers() {
-        // Avatar's observer
-        viewModel.getRandomImageUrl().observe(this, imageUrl ->
+        // Button enabling's observer
+        viewModel.getViewStateLiveData().observe(this, viewState -> {
             Glide
                 .with(this)
-                .load(imageUrl)
+                .load(viewState.getImageUrl())
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .apply(RequestOptions.circleCropTransform())
-                .into(binding.avatar)
-        );
-
-        // Button enabling's observer
-        viewModel.getIsButtonEnabledMediatorLiveData().observe(this, isEnabled ->
-            binding.create.setEnabled(isEnabled)
-        );
+                .into(binding.avatar);
+            binding.create.setEnabled(viewState.isButtonEnabled());
+        });
 
         // Close activity's observer
         viewModel.getCloseSingleLiveData().observe(this, closeActivity ->

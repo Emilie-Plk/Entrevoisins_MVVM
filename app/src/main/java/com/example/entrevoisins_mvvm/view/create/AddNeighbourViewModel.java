@@ -2,11 +2,12 @@ package com.example.entrevoisins_mvvm.view.create;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.entrevoisins_mvvm.DI.DatabaseModule;
+import com.example.entrevoisins_mvvm.DI.AppModule;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 import com.example.entrevoisins_mvvm.view.utils.SingleLiveEvent;
@@ -25,19 +26,17 @@ public class AddNeighbourViewModel extends ViewModel {
     @NonNull
     private final NeighboursRepository repository;
 
-    // TODO: Maybe create a new object (List<String> or NeighbourData) to encapsulate all neighbour data?
     private final String randomImageUrl;
-    private final MutableLiveData<String> randomImageUrlMutableLiveData;
 
-    private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> nameMutableLiveData = new MutableLiveData<>(null);
 
-    private final MutableLiveData<String> addressMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> addressMutableLiveData = new MutableLiveData<>(null);
 
-    private final MutableLiveData<String> phoneNumberMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> phoneNumberMutableLiveData = new MutableLiveData<>(null);
 
-    private final MutableLiveData<String> aboutMeMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> aboutMeMutableLiveData = new MutableLiveData<>(null);
 
-    private final MediatorLiveData<Boolean> isButtonEnabledMediatorLiveData;
+    private final MediatorLiveData<AddNeighbourViewState> viewStateMediatorLiveData = new MediatorLiveData<>();
 
     private final SingleLiveEvent<Void> closeSingleLiveEvent = new SingleLiveEvent<>();
 
@@ -47,7 +46,7 @@ public class AddNeighbourViewModel extends ViewModel {
     @Inject
     public AddNeighbourViewModel(
         @NonNull NeighboursRepository repository,
-        @NonNull @DatabaseModule.IoExecutor Executor ioExecutor,
+        @NonNull @AppModule.IoExecutor Executor ioExecutor,
         @NonNull Clock clock
     ) {
         this.repository = repository;
@@ -55,29 +54,45 @@ public class AddNeighbourViewModel extends ViewModel {
 
         randomImageUrl = "https://i.pravatar.cc/150?u=" + Instant.now(clock).toEpochMilli();
 
-        randomImageUrlMutableLiveData = new MutableLiveData<>(randomImageUrl);
-
-        isButtonEnabledMediatorLiveData = new MediatorLiveData<>();
-
-        isButtonEnabledMediatorLiveData.setValue(false); // TODO: is it ok to set initial value like this?
-
-        isButtonEnabledMediatorLiveData.addSource(nameMutableLiveData, name ->
-            combine(name, addressMutableLiveData.getValue(), phoneNumberMutableLiveData.getValue(), aboutMeMutableLiveData.getValue()
-            )
+        viewStateMediatorLiveData.addSource(nameMutableLiveData, name ->
+            combine(name, addressMutableLiveData.getValue(), phoneNumberMutableLiveData.getValue(), aboutMeMutableLiveData.getValue())
         );
-        isButtonEnabledMediatorLiveData.addSource(addressMutableLiveData, address ->
-            combine(nameMutableLiveData.getValue(), address, phoneNumberMutableLiveData.getValue(), aboutMeMutableLiveData.getValue()
-            )
+        viewStateMediatorLiveData.addSource(addressMutableLiveData, address ->
+            combine(nameMutableLiveData.getValue(), address, phoneNumberMutableLiveData.getValue(), aboutMeMutableLiveData.getValue())
         );
-        isButtonEnabledMediatorLiveData.addSource(phoneNumberMutableLiveData, phoneNumber ->
-            combine(nameMutableLiveData.getValue(), addressMutableLiveData.getValue(), phoneNumber, aboutMeMutableLiveData.getValue()
-            )
+        viewStateMediatorLiveData.addSource(phoneNumberMutableLiveData, phoneNumber ->
+            combine(nameMutableLiveData.getValue(), addressMutableLiveData.getValue(), phoneNumber, aboutMeMutableLiveData.getValue())
         );
-        isButtonEnabledMediatorLiveData.addSource(aboutMeMutableLiveData, aboutMe ->
+        viewStateMediatorLiveData.addSource(aboutMeMutableLiveData, aboutMe ->
             combine(nameMutableLiveData.getValue(), addressMutableLiveData.getValue(), phoneNumberMutableLiveData.getValue(), aboutMe)
         );
     }
 
+    private void combine(
+        @Nullable String name,
+        @Nullable String address,
+        @Nullable String phone,
+        @Nullable String aboutMe
+    ) {
+        if (name != null && address != null && phone != null && aboutMe != null) {
+            viewStateMediatorLiveData.setValue(
+                new AddNeighbourViewState(
+                    randomImageUrl,
+                    !name.isEmpty()
+                        && !address.isEmpty()
+                        && !phone.isEmpty()
+                        && !aboutMe.isEmpty()
+                )
+            );
+        } else {
+            viewStateMediatorLiveData.setValue(
+                new AddNeighbourViewState(
+                    randomImageUrl,
+                    false
+                )
+            );
+        }
+    }
 
     public void addNeighbour(
         @NonNull String name,
@@ -106,28 +121,8 @@ public class AddNeighbourViewModel extends ViewModel {
         return closeSingleLiveEvent;
     }
 
-    public MutableLiveData<String> getRandomImageUrl() {
-        return randomImageUrlMutableLiveData;
-    }
-
-    public MutableLiveData<Boolean> getIsButtonEnabledMediatorLiveData() {
-        return isButtonEnabledMediatorLiveData;
-    }
-
-    private void combine(
-        @Nullable String name,
-        @Nullable String address,
-        @Nullable String phone,
-        @Nullable String aboutMe
-    ) {
-        if (name == null || address == null || phone == null || aboutMe == null) {
-            return;
-        }
-        isButtonEnabledMediatorLiveData.setValue(!name.isEmpty()
-            && !address.isEmpty()
-            && !phone.isEmpty()
-            && !aboutMe.isEmpty()
-        );
+    public LiveData<AddNeighbourViewState> getViewStateLiveData() {
+        return viewStateMediatorLiveData;
     }
 
     private void setValueForCompletion(@NonNull MutableLiveData<String> mutableLiveData, @NonNull String value) {

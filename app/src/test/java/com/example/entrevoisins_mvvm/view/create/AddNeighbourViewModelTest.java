@@ -1,8 +1,6 @@
 package com.example.entrevoisins_mvvm.view.create;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -72,52 +70,62 @@ public class AddNeighbourViewModelTest {
         verifyNoMoreInteractions(repository);
     }
 
-    @Test
-    public void nominal_case_imageUrl() {
-        // WHEN
-        String imageUrl = TestUtil.getValueForTesting(viewModel.getRandomImageUrl());
-
-        // THEN
-        assertEquals(imageUrl, "https://i.pravatar.cc/150?u=" + EPOCH_MILLI);
-    }
-
-
     // region Field completion
     @Test
-    public void nominal_case_isButtonEnabledMutableLiveData() {
+    public void nominal_case() {
         // WHEN
-        Boolean isButtonEnabledMutableLiveData = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+        AddNeighbourViewState result = TestUtil.getValueForTesting(viewModel.getViewStateLiveData());
 
         // THEN
-        assertFalse(isButtonEnabledMutableLiveData);
+        assertEquals(
+            new AddNeighbourViewState(
+                "https://i.pravatar.cc/150?u=" + EPOCH_MILLI,
+                false
+            ),
+            result
+        );
     }
-
 
     @Test
     public void nominal_case_isButtonEnabledMutableLiveData_on_all_fields_filled() {
-        // WHEN
+        // GIVEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
         viewModel.setValueForPhoneNumber(PHONE_NUMBER);
         viewModel.setValueForAboutMe(ABOUT_ME);
-        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+
+        // WHEN
+        AddNeighbourViewState result = TestUtil.getValueForTesting(viewModel.getViewStateLiveData());
 
         // THEN
-        assertTrue(isButtonEnabled);
+        assertEquals(
+            new AddNeighbourViewState(
+                "https://i.pravatar.cc/150?u=" + EPOCH_MILLI,
+                true
+            ),
+            result
+        );
     }
 
     @Test
     public void nominal_case_isButtonEnabledMutableLiveData_on_fields_partially_filled() {
-        // WHEN
+        // GIVEN
         viewModel.setValueForName(NAME);
         viewModel.setValueForAddress(ADDRESS);
         viewModel.setValueForPhoneNumber("");
         viewModel.setValueForAboutMe(ABOUT_ME);
 
-        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
+        // WHEN
+        AddNeighbourViewState result = TestUtil.getValueForTesting(viewModel.getViewStateLiveData());
 
         // THEN
-        assertFalse(isButtonEnabled);
+        assertEquals(
+            new AddNeighbourViewState(
+                "https://i.pravatar.cc/150?u=" + EPOCH_MILLI,
+                false
+            ),
+            result
+        );
     }
 
     @Test
@@ -130,10 +138,16 @@ public class AddNeighbourViewModelTest {
 
         // WHEN
         viewModel.setValueForPhoneNumber("");
+        AddNeighbourViewState result = TestUtil.getValueForTesting(viewModel.getViewStateLiveData());
 
         // THEN
-        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
-        assertFalse(isButtonEnabled);
+        assertEquals(
+            new AddNeighbourViewState(
+                "https://i.pravatar.cc/150?u=" + EPOCH_MILLI,
+                false
+            ),
+            result
+        );
     }
     // endregion
 
