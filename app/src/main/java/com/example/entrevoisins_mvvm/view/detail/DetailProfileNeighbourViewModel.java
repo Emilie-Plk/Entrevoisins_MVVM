@@ -6,12 +6,18 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.entrevoisins_mvvm.DI.DatabaseModule;
 import com.example.entrevoisins_mvvm.R;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 
 import java.util.concurrent.Executor;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class DetailProfileNeighbourViewModel extends ViewModel {
 
     private final NeighboursRepository repository;
@@ -20,9 +26,10 @@ public class DetailProfileNeighbourViewModel extends ViewModel {
     @NonNull
     private final Executor ioExecutor;
 
+    @Inject
     public DetailProfileNeighbourViewModel(
         @NonNull NeighboursRepository repository,
-        @NonNull Executor ioExecutor
+        @NonNull @DatabaseModule.IoExecutor Executor ioExecutor
     ) {
         this.repository = repository;
         this.ioExecutor = ioExecutor;

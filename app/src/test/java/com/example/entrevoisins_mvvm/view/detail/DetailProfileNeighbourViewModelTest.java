@@ -42,7 +42,7 @@ public class DetailProfileNeighbourViewModelTest {
     private static final int FAV_STAR_DRAWABLE = R.drawable.baseline_star_24;
 
     private static final NeighbourEntity NEIGHBOUR_ENTITY = new NeighbourEntity(
-        1,
+        NEIGHBOUR_ID,
         false,
         "Usagi",
         "https://i.pravatar.cc/150?u=" + System.currentTimeMillis(),

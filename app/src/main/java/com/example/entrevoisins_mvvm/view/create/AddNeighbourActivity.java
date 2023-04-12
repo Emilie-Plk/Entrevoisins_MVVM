@@ -16,10 +16,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.entrevoisins_mvvm.databinding.AddNeighbourActivityBinding;
-import com.example.entrevoisins_mvvm.utils.ViewModelFactory;
 
 import java.util.function.Consumer;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class AddNeighbourActivity extends AppCompatActivity {
     private AddNeighbourActivityBinding binding;
 
@@ -44,9 +46,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
 
     private void setViewModel() {
-        viewModel = new ViewModelProvider(
-            this, ViewModelFactory.getInstance())
-            .get(AddNeighbourViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AddNeighbourViewModel.class);
     }
 
     private void checkForFieldsCompletion() {

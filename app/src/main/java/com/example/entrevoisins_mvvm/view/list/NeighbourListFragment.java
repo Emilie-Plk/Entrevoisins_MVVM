@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.entrevoisins_mvvm.databinding.NeighbourListFragmentBinding;
-import com.example.entrevoisins_mvvm.utils.ViewModelFactory;
 import com.example.entrevoisins_mvvm.view.detail.DetailProfileNeighbourActivity;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class NeighbourListFragment extends Fragment {
 
     private NeighbourListViewModel viewModel;
@@ -56,7 +57,7 @@ public class NeighbourListFragment extends Fragment {
     }
 
     private void setUpViewModel() {
-        viewModel = new ViewModelProvider(requireActivity(), ViewModelFactory.getInstance()).get(NeighbourListViewModel.class);
+        viewModel = new ViewModelProvider(this).get(NeighbourListViewModel.class);
     }
 
     private void initRecyclerView() {

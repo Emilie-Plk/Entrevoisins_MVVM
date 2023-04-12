@@ -5,19 +5,31 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.entrevoisins_mvvm.DI.DatabaseModule;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class NeighbourListViewModel extends ViewModel {
 
     @NonNull
     private final NeighboursRepository repository;
 
-    public NeighbourListViewModel(@NonNull NeighboursRepository repository) {
+    @NonNull
+    private final Executor ioExecutor;
+
+    @Inject
+    public NeighbourListViewModel(@NonNull NeighboursRepository repository, @DatabaseModule.IoExecutor Executor ioExecutor) {
         this.repository = repository;
+        this.ioExecutor = ioExecutor;
     }
 
     public LiveData<List<NeighbourViewStateItem>> getNeighbourViewStateItemLiveData(boolean isFav) {
@@ -40,6 +52,6 @@ public class NeighbourListViewModel extends ViewModel {
     }
 
     public void deleteNeighbour(long id) {
-        repository.deleteNeighbour(id);
+        ioExecutor.execute(() -> repository.deleteNeighbour(id));
     }
 }

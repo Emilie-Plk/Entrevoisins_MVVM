@@ -4,13 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.entrevoisins_mvvm.DI.DatabaseModule;
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
 import com.example.entrevoisins_mvvm.view.utils.SingleLiveEvent;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.util.concurrent.Executor;
 
+import javax.inject.Inject;
+
+import dagger.Provides;
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class AddNeighbourViewModel extends ViewModel {
 
     @NonNull
@@ -32,16 +40,22 @@ public class AddNeighbourViewModel extends ViewModel {
 
     private final SingleLiveEvent<Void> closeSingleLiveEvent = new SingleLiveEvent<>();
 
+    @NonNull
+    private final Executor ioExecutor;
+    @Inject
     public AddNeighbourViewModel(
         @NonNull NeighboursRepository repository,
+        @NonNull @DatabaseModule.IoExecutor Executor ioExecutor,
         @NonNull Clock clock
     ) {
         this.repository = repository;
+        this.ioExecutor = ioExecutor;
 
         randomImageUrl = "https://i.pravatar.cc/150?u=" + Instant.now(clock).toEpochMilli();
 
         randomImageUrlMutableLiveData = new MutableLiveData<>(randomImageUrl);
     }
+
 
     public void addNeighbour(
         @NonNull String name,
@@ -49,17 +63,20 @@ public class AddNeighbourViewModel extends ViewModel {
         @NonNull String phoneNumber,
         @NonNull String aboutMe
     ) {
-        repository.addNeighbour(
-            new NeighbourEntity(
-                0,
-                false,
-                name,
-                randomImageUrl,
-                address,
-                phoneNumber,
-                aboutMe
+        ioExecutor.execute(() ->
+            repository.addNeighbour(
+                new NeighbourEntity(
+                    0,
+                    false,
+                    name,
+                    randomImageUrl,
+                    address,
+                    phoneNumber,
+                    aboutMe
+                )
             )
         );
+
         closeSingleLiveEvent.call();
     }
 
@@ -77,7 +94,7 @@ public class AddNeighbourViewModel extends ViewModel {
 
     private void updateIsButtonEnabledMutableLiveData() {
         isButtonEnabledMutableLiveData.setValue(
-            // TODO: getValue() => not good except inside of combine()!
+            // TODO: getValue() => not good except inside of combine()... how about MediatorLiveData?
             !randomImageUrlMutableLiveData.getValue().isEmpty()
                 && !nameMutableLiveData.getValue().isEmpty()
                 && !addressMutableLiveData.getValue().isEmpty()

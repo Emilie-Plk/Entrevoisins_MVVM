@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
+import com.example.entrevoisins_mvvm.utils.TestExecutor;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -40,7 +41,7 @@ public class NeighbourListViewModelTest {
         List<NeighbourEntity> dummyNeighbourList = getNoFavoriteNeighbourListTest();
         neighbourListMutableLiveData.setValue(dummyNeighbourList);
 
-        viewModel = new NeighbourListViewModel(repository);
+        viewModel = new NeighbourListViewModel(repository, new TestExecutor());
     }
 
     @Test

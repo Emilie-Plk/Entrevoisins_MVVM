@@ -28,6 +28,7 @@ public class NeighbourRepositoryTest {
 
     @Rule
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
+    // for livedata
 
     private final NeighbourDao neighbourDao = mock(NeighbourDao.class);
 
@@ -35,7 +36,7 @@ public class NeighbourRepositoryTest {
 
     @Before
     public void setUp() {
-        repository = new NeighboursRepository(neighbourDao, new TestExecutor());
+        repository = new NeighboursRepository(neighbourDao);
     }
 
     @Test

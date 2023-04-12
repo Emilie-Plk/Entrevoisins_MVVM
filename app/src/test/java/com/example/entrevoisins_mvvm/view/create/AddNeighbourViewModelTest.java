@@ -11,6 +11,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 
 import com.example.entrevoisins_mvvm.data.entities.NeighbourEntity;
 import com.example.entrevoisins_mvvm.data.repository.NeighboursRepository;
+import com.example.entrevoisins_mvvm.utils.TestExecutor;
 import com.example.entrevoisins_mvvm.utils.TestUtil;
 
 import org.junit.Before;
@@ -41,7 +42,7 @@ public class AddNeighbourViewModelTest {
 
     @Before
     public void setUp() {
-        viewModel = new AddNeighbourViewModel(repository, clock);
+        viewModel = new AddNeighbourViewModel(repository, new TestExecutor(), clock);
     }
 
     @Test
