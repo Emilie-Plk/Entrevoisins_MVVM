@@ -1,7 +1,0 @@
-
-i
-java:S1612G"GReplace this lambda with method reference 'binding.create::setEnabled'.(¯çùıÿÿÿÿ8æµæŠ÷0
-
-java:S1186`"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«û³±8¨ùÑ‰÷0
-
-java:S1186i"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(±¾ê8¨ùÑ‰÷0

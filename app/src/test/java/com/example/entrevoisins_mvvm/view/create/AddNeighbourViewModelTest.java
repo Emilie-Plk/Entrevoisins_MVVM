@@ -86,7 +86,7 @@ public class AddNeighbourViewModelTest {
     @Test
     public void nominal_case_isButtonEnabledMutableLiveData() {
         // WHEN
-        Boolean isButtonEnabledMutableLiveData = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
+        Boolean isButtonEnabledMutableLiveData = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
 
         // THEN
         assertFalse(isButtonEnabledMutableLiveData);
@@ -100,7 +100,7 @@ public class AddNeighbourViewModelTest {
         viewModel.setValueForAddress(ADDRESS);
         viewModel.setValueForPhoneNumber(PHONE_NUMBER);
         viewModel.setValueForAboutMe(ABOUT_ME);
-        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
+        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
 
         // THEN
         assertTrue(isButtonEnabled);
@@ -114,7 +114,7 @@ public class AddNeighbourViewModelTest {
         viewModel.setValueForPhoneNumber("");
         viewModel.setValueForAboutMe(ABOUT_ME);
 
-        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
+        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
 
         // THEN
         assertFalse(isButtonEnabled);
@@ -132,7 +132,7 @@ public class AddNeighbourViewModelTest {
         viewModel.setValueForPhoneNumber("");
 
         // THEN
-        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMutableLiveData());
+        boolean isButtonEnabled = TestUtil.getValueForTesting(viewModel.getIsButtonEnabledMediatorLiveData());
         assertFalse(isButtonEnabled);
     }
     // endregion

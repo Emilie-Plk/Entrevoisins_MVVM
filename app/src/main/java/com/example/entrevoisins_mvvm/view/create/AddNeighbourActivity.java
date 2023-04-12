@@ -39,8 +39,8 @@ public class AddNeighbourActivity extends AppCompatActivity {
         setContentView(view);
 
         setViewModel();
-        checkForFieldsCompletion();
         setupObservers();
+        checkForFieldsCompletion();
         addNewNeighbour();
     }
 
@@ -68,7 +68,7 @@ public class AddNeighbourActivity extends AppCompatActivity {
         );
 
         // Button enabling's observer
-        viewModel.getIsButtonEnabledMutableLiveData().observe(this, isEnabled ->
+        viewModel.getIsButtonEnabledMediatorLiveData().observe(this, isEnabled ->
             binding.create.setEnabled(isEnabled)
         );
 

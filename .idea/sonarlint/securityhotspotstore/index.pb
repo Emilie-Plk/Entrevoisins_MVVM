@@ -43,9 +43,5 @@ Rapp/src/main/java/com/example/entrevoisins_mvvm/view/utils/MainThreadExecutor.j
 Uapp/src/main/java/com/example/entrevoisins_mvvm/view/list/NeighbourListViewModel.java,1\d\1d43e262f9a5f8242f740d6244dce85ea3f2b90f
 „
 Tapp/src/main/java/com/example/entrevoisins_mvvm/view/list/NeighbourListFragment.java,d\b\db3aaabc48900fbfe3033f70ce7889aa732477b6
-…
-Uapp/src/main/java/com/example/entrevoisins_mvvm/view/create/AddNeighbourActivity.java,0\e\0e9651bdee5137304e19102b72b54d1167e6151d
-„
-Tapp/src/androidTest/java/com/example/entrevoisins_mvvm/daoTest/NeighbourDaoTest.java,e\7\e7ba554137dff447e1d8153e2bede984c9178a2d
 Š
 Zapp/src/test/java/com/example/entrevoisins_mvvm/view/create/AddNeighbourViewModelTest.java,b\0\b0dd0c5e6bc1cf0e66dfc52d926b61477ead627a
